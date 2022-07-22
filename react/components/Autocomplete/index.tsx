@@ -57,10 +57,6 @@ interface AutoCompleteProps {
   simulationBehavior: 'default' | 'skip' | null
   hideUnavailableItems: boolean
   push: (data: any) => void
-  HorizontalProductSummary?: React.ComponentType<{
-    product: Product
-    actionOnClick: () => void
-  }>
   closeMenu: () => void
   orderBy?: string
 }
@@ -493,7 +489,6 @@ class AutoComplete extends React.Component<
             handleSeeAllClick(push, runtime.page)(term)
             this.closeModal()
           }}
-          HorizontalProductSummary={this.props.HorizontalProductSummary}
         />
       </>
     )
