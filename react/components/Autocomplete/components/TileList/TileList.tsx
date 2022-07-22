@@ -10,7 +10,6 @@ import { ProductLayout } from '../..'
 interface TileListProps {
   term: string
   title: string | JSX.Element
-  customPage?: string
   products: any[]
   showTitle: boolean
   shelfProductCount: number
@@ -25,6 +24,39 @@ interface TileListProps {
   }>
 }
 
+interface SeeMoreButtonProps {
+  term: string
+  onSeeAllClick: (term: string) => void
+  totalProducts: number
+}
+const SeeMoreButton = (props: SeeMoreButtonProps) => {
+  const { term, totalProducts } = props
+
+  // TODO Remove hard coding
+
+  const stylesObj = {
+    display: 'block',
+    height: '60px',
+    lineHeight: '60px',
+    fontSize: '13px',
+    color: '#787878',
+    textAlign: 'center',
+  }
+  return (
+    <Link
+      query={`map=ft&_q=${props.term}`}
+      params={{
+        term,
+      }}
+      page="store.search"
+      onClick={() => props.onSeeAllClick(term)}
+      styles={stylesObj}
+    >
+      See all {totalProducts} productszzzzz
+    </Link>
+  )
+}
+
 const TileList: FC<TileListProps> = ({
   term,
   title,
@@ -36,7 +68,6 @@ const TileList: FC<TileListProps> = ({
   onProductClick,
   onSeeAllClick,
   HorizontalProductSummary,
-  customPage,
 }) => {
   if (products.length === 0 && !isLoading) {
     return null
@@ -97,21 +128,13 @@ const TileList: FC<TileListProps> = ({
             })}
           </ul>
 
-          <footer className={styles.tileListFooter}>
-            {totalProducts > 0 ? (
-              <Link
-                query={`map=ft&_q=${term}`}
-                params={{
-                  term,
-                }}
-                page={customPage || 'store.search'}
-                className={styles.tileListSeeMore}
-                onClick={() => onSeeAllClick(term)}
-              >
-                See all {totalProducts} products
-              </Link>
-            ) : null}
-          </footer>
+          {totalProducts > 0 && (
+            <SeeMoreButton
+              term={term}
+              onSeeAllClick={onSeeAllClick}
+              totalProducts={totalProducts}
+            />
+          )}
         </>
       )}
     </section>

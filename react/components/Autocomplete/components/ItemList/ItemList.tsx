@@ -14,7 +14,6 @@ interface ItemListProps {
   modifier?: string
   onItemHover?: (item: Item | AttributeItem) => void
   showTitleOnEmpty?: boolean
-  customPage?: string
   closeModal: () => void
 }
 
@@ -79,7 +78,7 @@ export class ItemList extends React.Component<ItemListProps> {
                 onBlur={() => this.handleMouseOut()}
               >
                 <Link
-                  page={this.props.customPage ?? 'store.search'}
+                  page="store.search"
                   params={{
                     term: item.value,
                   }}

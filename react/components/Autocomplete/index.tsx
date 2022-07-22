@@ -75,7 +75,6 @@ interface AutoCompleteProps {
     product: Product
     actionOnClick: () => void
   }>
-  customPage?: string
   closeMenu: () => void
   orderBy?: string
 }
@@ -428,7 +427,6 @@ class AutoComplete extends React.Component<
           )(value, position)
           this.closeModal()
         }}
-        customPage={this.props.customPage}
         closeModal={() => this.closeModal()}
       />
     )
@@ -458,7 +456,6 @@ class AutoComplete extends React.Component<
               )(value, position)
               this.closeModal()
             }}
-            customPage={this.props.customPage}
             closeModal={() => this.closeModal()}
           />
         ) : null}
@@ -478,7 +475,6 @@ class AutoComplete extends React.Component<
               )(value, position)
               this.closeModal()
             }}
-            customPage={this.props.customPage}
             closeModal={() => this.closeModal()}
           />
         ) : null}
@@ -496,7 +492,6 @@ class AutoComplete extends React.Component<
         {this.renderSuggestions()}
         <TileList
           term={inputValueEncoded || ''}
-          customPage={this.props.customPage}
           shelfProductCount={MAX_SUGGESTED_PRODUCTS}
           title={`Products for ${inputValue}`}
           products={products || []}
