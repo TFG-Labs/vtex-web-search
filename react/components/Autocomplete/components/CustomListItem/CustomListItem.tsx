@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { FC } from 'react'
 import { Link } from 'vtex.render-runtime'
-import { SellingPrice, ListPrice } from 'vtex.product-price'
-import { ProductContextProvider } from 'vtex.product-context'
 
 import styles from './styles.css'
 
@@ -13,7 +11,6 @@ interface CustomListItemProps {
 
 const CustomListItem: FC<CustomListItemProps> = ({ product, onClick }) => {
   const sku = product?.sku
-  const taxPercentage = sku?.sellers?.[0]?.commertialOffer?.taxPercentage
 
   return (
     <div>
@@ -42,31 +39,6 @@ const CustomListItem: FC<CustomListItemProps> = ({ product, onClick }) => {
               <span className={`${styles.productBrand} f5 c-on-base`}>
                 {product.productName}
               </span>
-            </div>
-            <div className={styles.priceContainer}>
-              <ProductContextProvider
-                product={product}
-                query={{
-                  skuId: sku?.itemId,
-                }}
-              >
-                <span className="db f7 c-muted-2">
-                  <ListPrice
-                    message={
-                      taxPercentage ? '{listPriceWithTax}' : '{listPriceValue}'
-                    }
-                  />
-                </span>
-                <span className="dib t-small c-muted-2">
-                  <SellingPrice
-                    message={
-                      taxPercentage
-                        ? '{sellingPriceWithTax}'
-                        : '{sellingPriceValue}'
-                    }
-                  />
-                </span>
-              </ProductContextProvider>
             </div>
           </div>
         </article>
