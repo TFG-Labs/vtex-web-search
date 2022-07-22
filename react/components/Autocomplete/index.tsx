@@ -52,20 +52,6 @@ interface AutoCompleteProps {
   hideTitles: boolean
   historyFirst: boolean
   isMobile: boolean
-  customBreakpoints?: {
-    md: {
-      width: number
-      maxSuggestedProducts: number
-    }
-    lg: {
-      width: number
-      maxSuggestedProducts: number
-    }
-    xlg: {
-      width: number
-      maxSuggestedProducts: number
-    }
-  }
   __unstableProductOrigin: 'BIGGY' | 'VTEX'
   __unstableProductOriginVtex: boolean
   simulationBehavior: 'default' | 'skip' | null
