@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import React from 'react'
 import { withApollo, WithApolloClient } from 'react-apollo'
-import { FormattedMessage } from 'react-intl'
 import { IconClose, IconClock } from 'vtex.styleguide'
 import { ProductListContext } from 'vtex.product-list-context'
 import { withDevice } from 'vtex.device-detector'
@@ -354,8 +353,8 @@ class AutoComplete extends React.Component<
         ({
           prefix: (
             <>
-              {`${index + 1}`}
-              <FormattedMessage id="store/ordinalNumber" />
+              {`${index + 1}.`}
+              ------
             </>
           ),
           value: query.term,
@@ -411,11 +410,7 @@ class AutoComplete extends React.Component<
     const hasSuggestion =
       !!this.state.suggestionItems && this.state.suggestionItems.length > 0
 
-    const titleMessage = hasSuggestion ? (
-      <FormattedMessage id="store/suggestions" />
-    ) : (
-      <FormattedMessage id="store/emptySuggestion" />
-    )
+    const titleMessage = hasSuggestion ? 'Suggestions' : 'No Suggestions'
 
     return (
       <ItemList
@@ -452,7 +447,7 @@ class AutoComplete extends React.Component<
         this.state.history.length === 0 ? (
           <ItemList
             modifier="top-search"
-            title={<FormattedMessage id="store/topSearches" />}
+            title="Top Searches"
             items={this.state.topSearchedItems || []}
             showTitle={!this.props.hideTitles}
             onItemClick={(value, position) => {
@@ -472,7 +467,7 @@ class AutoComplete extends React.Component<
         (this.props.isMobile && this.props.historyFirst) ? (
           <ItemList
             modifier="history"
-            title={<FormattedMessage id="store/history" />}
+            title="Search History"
             items={this.state.history || []}
             showTitle={!this.props.hideTitles}
             onItemClick={(value, position) => {
@@ -503,12 +498,7 @@ class AutoComplete extends React.Component<
           term={inputValueEncoded || ''}
           customPage={this.props.customPage}
           shelfProductCount={MAX_SUGGESTED_PRODUCTS}
-          title={
-            <FormattedMessage
-              id="store/suggestedProducts"
-              values={{ term: inputValue }}
-            />
-          }
+          title={`Products for ${inputValue}`}
           products={products || []}
           showTitle={!hideTitles}
           totalProducts={totalProducts || 0}

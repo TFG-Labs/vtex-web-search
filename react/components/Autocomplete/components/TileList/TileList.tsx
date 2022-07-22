@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import { ExtensionPoint, Link } from 'vtex.render-runtime'
 import { Spinner } from 'vtex.styleguide'
 import ProductSummary from 'vtex.product-summary/ProductSummaryCustom'
-import { FormattedMessage } from 'react-intl'
 
 import styles from './styles.css'
 import CustomListItem from '../CustomListItem/CustomListItem'
@@ -109,10 +108,7 @@ const TileList: FC<TileListProps> = ({
                 className={styles.tileListSeeMore}
                 onClick={() => onSeeAllClick(term)}
               >
-                <FormattedMessage
-                  id="store/seeMore"
-                  values={{ count: totalProducts }}
-                />
+                See all {totalProducts} products
               </Link>
             ) : null}
           </footer>
