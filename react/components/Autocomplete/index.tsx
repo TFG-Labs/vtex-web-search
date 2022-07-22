@@ -30,8 +30,8 @@ import {
 } from '../../utils/pixel'
 
 const MAX_TOP_SEARCHES_DEFAULT = 10
-const MAX_SUGGESTED_TERMS_DEFAULT = 5
-const MAX_SUGGESTED_PRODUCTS_DEFAULT = 3
+const MAX_SUGGESTED_TERMS_DEFAULT = 9
+const MAX_SUGGESTED_PRODUCTS = 5
 const MAX_HISTORY_DEFAULT = 5
 
 // eslint-disable-next-line no-shadow, no-restricted-syntax
@@ -312,7 +312,7 @@ class AutoComplete extends React.Component<
       simulationBehavior,
       hideUnavailableItems,
       orderBy,
-      this.props.maxSuggestedProducts || MAX_SUGGESTED_PRODUCTS_DEFAULT
+      MAX_SUGGESTED_PRODUCTS
     )
 
     if (!queryFromHover) {
@@ -335,7 +335,7 @@ class AutoComplete extends React.Component<
 
     const products = productSuggestions.products.slice(
       0,
-      this.getProductCount()
+      MAX_SUGGESTED_PRODUCTS
     )
 
     this.setState({
@@ -502,7 +502,7 @@ class AutoComplete extends React.Component<
         <TileList
           term={inputValueEncoded || ''}
           customPage={this.props.customPage}
-          shelfProductCount={this.getProductCount()}
+          shelfProductCount={MAX_SUGGESTED_PRODUCTS}
           title={
             <FormattedMessage
               id="store/suggestedProducts"
@@ -512,7 +512,7 @@ class AutoComplete extends React.Component<
           products={products || []}
           showTitle={!hideTitles}
           totalProducts={totalProducts || 0}
-          layout={this.getProductLayout()}
+          layout={ProductLayout.Horizontal}
           isLoading={isProductsLoading}
           onProductClick={(id, position) => {
             handleProductClick(push, runtime.page)(id, position)
@@ -547,52 +547,6 @@ class AutoComplete extends React.Component<
     )
   }
 
-  getProductLayout = () => {
-    const { productLayout, isMobile } = this.props
-
-    if (typeof productLayout !== 'undefined') {
-      return productLayout
-    }
-
-    return isMobile ? ProductLayout.Horizontal : ProductLayout.Vertical
-  }
-
-  getProductCount() {
-    const {
-      customBreakpoints,
-      isMobile,
-      maxSuggestedProducts = MAX_SUGGESTED_PRODUCTS_DEFAULT,
-    } = this.props
-
-    if (!window || isMobile || !customBreakpoints) {
-      return maxSuggestedProducts
-    }
-
-    const windowWidth = window.innerWidth
-
-    if (
-      !customBreakpoints.md ||
-      !customBreakpoints.lg ||
-      !customBreakpoints.xlg
-    ) {
-      return maxSuggestedProducts
-    }
-
-    if (windowWidth >= customBreakpoints.xlg.width) {
-      return customBreakpoints.xlg.maxSuggestedProducts
-    }
-
-    if (windowWidth >= customBreakpoints.lg.width) {
-      return customBreakpoints.lg.maxSuggestedProducts
-    }
-
-    if (windowWidth >= customBreakpoints.md.width) {
-      return customBreakpoints.md.maxSuggestedProducts
-    }
-
-    return maxSuggestedProducts
-  }
-
   render() {
     const hiddenClass =
       !this.props.isOpen || !this.hasContent()
@@ -613,10 +567,7 @@ class AutoComplete extends React.Component<
           // tslint:disable-next-line: max-line-length
           className={`${stylesCss['biggy-autocomplete']} ${hiddenClass} w-100`}
           style={{
-            flexDirection:
-              this.getProductLayout() === ProductLayout.Horizontal
-                ? 'column'
-                : 'row',
+            flexDirection: 'column',
           }}
         >
           <ProductListProvider listName="autocomplete-result-list">
