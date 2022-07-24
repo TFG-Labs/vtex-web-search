@@ -10,7 +10,6 @@ interface TileListProps {
   term: string
   title: string | JSX.Element
   products: any[]
-  showTitle: boolean
   shelfProductCount: number
   totalProducts: number
   isLoading: boolean
@@ -22,7 +21,6 @@ const TileList: FC<TileListProps> = ({
   term,
   title,
   products,
-  showTitle,
   totalProducts,
   isLoading,
   onProductClick,
@@ -34,9 +32,7 @@ const TileList: FC<TileListProps> = ({
 
   return (
     <section className={styles.tileList}>
-      {showTitle ? (
-        <p className={`${styles.tileListTitle} c-on-base`}>{title}</p>
-      ) : null}
+      <p className={` c-on-base`}>{title}</p>
       {isLoading ? (
         <div className={styles.tileListSpinner}>
           <Spinner />

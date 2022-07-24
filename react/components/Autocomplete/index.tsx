@@ -41,8 +41,6 @@ interface AutoCompleteProps {
   maxSuggestedTerms: number
   maxSuggestedProducts: number
   maxHistory: number
-
-  hideTitles: boolean
   isMobile: boolean
   __unstableProductOrigin: 'BIGGY' | 'VTEX'
   __unstableProductOriginVtex: boolean
@@ -390,7 +388,7 @@ class AutoComplete extends React.Component<
         title={titleMessage}
         items={this.state.suggestionItems || []}
         modifier="suggestion"
-        showTitle={!hasSuggestion || !this.props.hideTitles}
+        showTitle={!hasSuggestion}
         onItemHover={this.handleItemHover}
         showTitleOnEmpty={this.props.maxSuggestedTerms !== 0}
         onItemClick={(value, position) => {
@@ -413,7 +411,7 @@ class AutoComplete extends React.Component<
           modifier="top-search"
           title="Top Searches"
           items={this.state.topSearchedItems || []}
-          showTitle={!this.props.hideTitles}
+          showTitle
           onItemClick={(value, position) => {
             handleItemClick(
               this.props.push,
@@ -429,7 +427,7 @@ class AutoComplete extends React.Component<
           modifier="history"
           title="Search History"
           items={this.state.history || []}
-          showTitle={!this.props.hideTitles}
+          showTitle
           onItemClick={(value, position) => {
             handleItemClick(
               this.props.push,
@@ -446,7 +444,7 @@ class AutoComplete extends React.Component<
 
   contentWhenQueryIsNotEmpty() {
     const { products, totalProducts, isProductsLoading } = this.state
-    const { hideTitles, push, runtime, inputValue } = this.props
+    const { push, runtime, inputValue } = this.props
     const inputValueEncoded = encodeUrlString(inputValue)
 
     return (
@@ -457,7 +455,6 @@ class AutoComplete extends React.Component<
           shelfProductCount={MAX_SUGGESTED_PRODUCTS}
           title={`Products for ${inputValue}`}
           products={products || []}
-          showTitle={!hideTitles}
           totalProducts={totalProducts || 0}
           isLoading={isProductsLoading}
           onProductClick={(id, position) => {
