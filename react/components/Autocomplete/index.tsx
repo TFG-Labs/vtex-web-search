@@ -38,8 +38,6 @@ interface AutoCompleteProps {
   isOpen: boolean
   runtime: { page: string }
   inputValue: string
-  maxSuggestedProducts: number
-  maxHistory: number
   push: (data: any) => void
   closeMenu: () => void
 }
@@ -309,7 +307,7 @@ class AutoComplete extends React.Component<
   updateHistory() {
     const history = this.client
       .searchHistory()
-      .slice(0, this.props.maxHistory || MAX_HISTORY_DEFAULT)
+      .slice(0, MAX_HISTORY_DEFAULT)
       .map((item: string) => {
         return {
           label: decodeUrlString(item),
