@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { Spinner } from 'vtex.styleguide'
 import ProductSummary from 'vtex.product-summary/ProductSummaryCustom'
 
 import styles from './styles.css'
@@ -34,9 +33,7 @@ const TileList: FC<TileListProps> = ({
     <section className={styles.tileList}>
       <p className={` c-on-base`}>{title}</p>
       {isLoading ? (
-        <div className={styles.tileListSpinner}>
-          <Spinner />
-        </div>
+        <div>loading</div>
       ) : (
         <>
           <ul
