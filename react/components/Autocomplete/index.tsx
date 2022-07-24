@@ -42,7 +42,7 @@ interface AutoCompleteProps {
   maxSuggestedProducts: number
   maxHistory: number
   isMobile: boolean
-  __unstableProductOrigin: 'BIGGY' | 'VTEX'
+
   __unstableProductOriginVtex: boolean
   simulationBehavior: 'default' | 'skip' | null
   push: (data: any) => void
@@ -244,7 +244,6 @@ class AutoComplete extends React.Component<
   async updateProducts() {
     const term = this.state.dynamicTerm
     const {
-      __unstableProductOrigin,
       __unstableProductOriginVtex = false,
       simulationBehavior = 'default',
     } = this.props
@@ -260,12 +259,6 @@ class AutoComplete extends React.Component<
       return
     }
 
-    if (__unstableProductOrigin) {
-      console.warn(
-        'The prop `__unstableProductOrigin` has been deprecated. Use the boolean prop `__unstableProductOriginVtex` instead.'
-      )
-    }
-
     this.setState({
       isProductsLoading: true,
     })
@@ -274,7 +267,7 @@ class AutoComplete extends React.Component<
       term,
       queryFromHover ? queryFromHover.key : undefined,
       queryFromHover ? queryFromHover.value : undefined,
-      __unstableProductOrigin === 'VTEX' || __unstableProductOriginVtex,
+      __unstableProductOriginVtex,
       simulationBehavior,
       MAX_SUGGESTED_PRODUCTS
     )
@@ -483,7 +476,7 @@ class AutoComplete extends React.Component<
   }
 
   render() {
-    console.log('whoop', this.props)
+    console.log('hoot')
     const hiddenClass =
       !this.props.isOpen || !this.hasContent()
         ? stylesCss['biggy-js-container--hidden']
