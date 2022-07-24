@@ -40,8 +40,6 @@ interface AutoCompleteProps {
   inputValue: string
   maxSuggestedProducts: number
   maxHistory: number
-
-  simulationBehavior: 'default' | 'skip' | null
   push: (data: any) => void
   closeMenu: () => void
 }
@@ -234,7 +232,6 @@ class AutoComplete extends React.Component<
 
   async updateProducts() {
     const term = this.state.dynamicTerm
-    const { simulationBehavior = 'default' } = this.props
 
     const { queryFromHover } = this.state
 
@@ -255,7 +252,6 @@ class AutoComplete extends React.Component<
       term,
       queryFromHover ? queryFromHover.key : undefined,
       queryFromHover ? queryFromHover.value : undefined,
-      simulationBehavior,
       MAX_SUGGESTED_PRODUCTS
     )
 
