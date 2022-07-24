@@ -17,7 +17,6 @@ import { withRuntime } from '../../utils/withRuntime'
 import { decodeUrlString, encodeUrlString } from '../../utils/string-utils'
 import {
   EventType,
-  handleAutocompleteSearch,
   handleItemClick,
   handleProductClick,
   handleSeeAllClick,
@@ -41,7 +40,6 @@ interface AutoCompleteState {
   history: Item[]
   products: any[]
   totalProducts: number
-  queryFromHover: { key?: string; value?: string }
   dynamicTerm: string
   isProductsLoading: boolean
   currentHeightWhenOpen: number
@@ -62,7 +60,7 @@ class AutoComplete extends React.Component<
     products: [],
     suggestionItems: [],
     totalProducts: 0,
-    queryFromHover: {},
+
     dynamicTerm: '',
     isProductsLoading: false,
     currentHeightWhenOpen: 0,
@@ -145,7 +143,6 @@ class AutoComplete extends React.Component<
 
     this.setState({
       dynamicTerm: inputValue,
-      queryFromHover: undefined,
     })
 
     if (inputValue === null || inputValue === '') {
@@ -221,8 +218,6 @@ class AutoComplete extends React.Component<
   async updateProducts() {
     const term = this.state.dynamicTerm
 
-    const { queryFromHover } = this.state
-
     if (!term) {
       this.setState({
         products: [],
@@ -238,22 +233,8 @@ class AutoComplete extends React.Component<
 
     const result = await this.client.suggestionProducts(
       term,
-      queryFromHover ? queryFromHover.key : undefined,
-      queryFromHover ? queryFromHover.value : undefined,
       MAX_SUGGESTED_PRODUCTS
     )
-
-    if (!queryFromHover) {
-      const { count, operator, misspelled } = result.data.productSuggestions
-
-      handleAutocompleteSearch(
-        this.props.push,
-        operator,
-        misspelled,
-        count,
-        term
-      )
-    }
 
     this.setState({
       isProductsLoading: false,

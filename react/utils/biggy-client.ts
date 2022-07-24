@@ -26,8 +26,7 @@ export default class BiggyClient {
   // eslint-disable-next-line max-params
   public async suggestionProducts(
     term: string,
-    attributeKey?: string,
-    attributeValue?: string,
+
     count?: number
   ): Promise<ApolloQueryResult<{ productSuggestions: IProductsOutput }>> {
     return this.client.query({
@@ -37,8 +36,6 @@ export default class BiggyClient {
         hideUnavailableItems: true,
         orderBy: 'OrderByScoreDESC',
         fullText: term,
-        facetKey: attributeKey,
-        facetValue: attributeValue,
         productOriginVtex: false,
         count,
       },
