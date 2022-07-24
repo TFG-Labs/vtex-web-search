@@ -43,7 +43,6 @@ interface AutoCompleteProps {
   maxHistory: number
   isMobile: boolean
 
-  __unstableProductOriginVtex: boolean
   simulationBehavior: 'default' | 'skip' | null
   push: (data: any) => void
   closeMenu: () => void
@@ -243,10 +242,7 @@ class AutoComplete extends React.Component<
 
   async updateProducts() {
     const term = this.state.dynamicTerm
-    const {
-      __unstableProductOriginVtex = false,
-      simulationBehavior = 'default',
-    } = this.props
+    const { simulationBehavior = 'default' } = this.props
 
     const { queryFromHover } = this.state
 
@@ -267,7 +263,6 @@ class AutoComplete extends React.Component<
       term,
       queryFromHover ? queryFromHover.key : undefined,
       queryFromHover ? queryFromHover.value : undefined,
-      __unstableProductOriginVtex,
       simulationBehavior,
       MAX_SUGGESTED_PRODUCTS
     )
