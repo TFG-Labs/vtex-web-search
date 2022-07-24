@@ -423,7 +423,6 @@ class AutoComplete extends React.Component<
       <>
         {this.renderSuggestions()}
         <TileList
-          shelfProductCount={MAX_SUGGESTED_PRODUCTS}
           title={`Products for ${inputValue}`}
           products={products || []}
           isLoading={isProductsLoading}

@@ -4,9 +4,8 @@ import ProductSummary from 'vtex.product-summary/ProductSummaryCustom'
 import CustomListItem from '../CustomListItem/CustomListItem'
 
 interface TileListProps {
-  title: string | JSX.Element
+  title: string
   products: any[]
-  shelfProductCount: number
   isLoading: boolean
   onProductClick: (product: string, position: number) => void
 }
