@@ -39,7 +39,6 @@ interface AutoCompleteProps {
   inputValue: string
   maxSuggestedProducts: number
   maxHistory: number
-  isMobile: boolean
 
   simulationBehavior: 'default' | 'skip' | null
   push: (data: any) => void
@@ -89,12 +88,7 @@ class AutoComplete extends React.Component<
   }
 
   fitAutocompleteInWindow() {
-    if (
-      !window ||
-      !this.autocompleteRef.current ||
-      !this.props.isMobile ||
-      this.isIOS
-    ) {
+    if (!window || !this.autocompleteRef.current || this.isIOS) {
       return
     }
 
