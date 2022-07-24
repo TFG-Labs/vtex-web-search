@@ -48,7 +48,6 @@ interface AutoCompleteProps {
   hideUnavailableItems: boolean
   push: (data: any) => void
   closeMenu: () => void
-  orderBy?: string
 }
 
 interface AutoCompleteState {
@@ -250,7 +249,6 @@ class AutoComplete extends React.Component<
       __unstableProductOriginVtex = false,
       simulationBehavior = 'default',
       hideUnavailableItems = false,
-      orderBy,
     } = this.props
 
     const { queryFromHover } = this.state
@@ -281,7 +279,6 @@ class AutoComplete extends React.Component<
       __unstableProductOrigin === 'VTEX' || __unstableProductOriginVtex,
       simulationBehavior,
       hideUnavailableItems,
-      orderBy,
       MAX_SUGGESTED_PRODUCTS
     )
 
@@ -489,7 +486,7 @@ class AutoComplete extends React.Component<
   }
 
   render() {
-    console.log('props', this.props)
+    console.log('whoop', this.props)
     const hiddenClass =
       !this.props.isOpen || !this.hasContent()
         ? stylesCss['biggy-js-container--hidden']

@@ -126,54 +126,6 @@ export function fromAttributesToFacets(attribute: any) {
   }
 }
 
-type OrderBy =
-  | 'OrderByPriceDESC'
-  | 'OrderByPriceASC'
-  | 'OrderByTopSaleDESC'
-  | 'OrderByReviewRateDESC'
-  | 'OrderByNameDESC'
-  | 'OrderByNameASC'
-  | 'OrderByReleaseDateDESC'
-  | 'OrderByBestDiscountDESC'
-
-/**
- * Convert from VTEX OrderBy into Biggy's sort.
- *
- * @export
- * @param {OrderBy} orderBy VTEX OrderBy.
- * @returns {string} Biggy's sort.
- */
-export function convertOrderBy(orderBy: OrderBy): string {
-  switch (orderBy) {
-    case 'OrderByPriceDESC':
-      return 'price:desc'
-
-    case 'OrderByPriceASC':
-      return 'price:asc'
-
-    case 'OrderByTopSaleDESC':
-      return 'orders:desc'
-
-    case 'OrderByReviewRateDESC':
-      return '' // TODO: Not Supported
-
-    case 'OrderByNameDESC':
-      return 'name:desc'
-
-    case 'OrderByNameASC':
-      return 'name:asc'
-
-    case 'OrderByReleaseDateDESC':
-      return 'fields.release:desc'
-
-    case 'OrderByBestDiscountDESC':
-      return 'discount:desc'
-
-    default:
-      return ''
-  }
-}
-
 export function convertURLToAttributePath(
   attributePath: string,
   map: string,
