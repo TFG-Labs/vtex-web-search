@@ -3,8 +3,6 @@ export interface Item {
   value: string
   link: string
   attributes?: AttributeItem[]
-  icon?: JSX.Element
-  prefix?: string | JSX.Element
 }
 
 export interface AttributeItem {
