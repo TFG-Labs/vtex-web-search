@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import ProductSummary from 'vtex.product-summary/ProductSummaryCustom'
 
-import styles from './styles.css'
 import CustomListItem from '../CustomListItem/CustomListItem'
 import SeeMoreButton from '../SeeMoreButton'
 
@@ -30,18 +29,13 @@ const TileList: FC<TileListProps> = ({
   }
 
   return (
-    <section className={styles.tileList}>
-      <p className={` c-on-base`}>{title}</p>
+    <section>
+      <p>{title}</p>
       {isLoading ? (
         <div>loading</div>
       ) : (
         <>
-          <ul
-            className={styles.tileListList}
-            style={{
-              flexDirection: 'column',
-            }}
-          >
+          <ul>
             {products.map((product, index: number) => {
               const productSummary: Product = ProductSummary.mapCatalogProductToProductSummary(
                 product
