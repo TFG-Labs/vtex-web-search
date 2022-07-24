@@ -37,7 +37,7 @@ interface AutoCompleteProps {
   isOpen: boolean
   runtime: { page: string }
   inputValue: string
-  maxTopSearches: number
+
   maxSuggestedTerms: number
   maxSuggestedProducts: number
   maxHistory: number
@@ -317,9 +317,8 @@ class AutoComplete extends React.Component<
   async updateTopSearches() {
     const result = await this.client.topSearches()
     const { searches } = result.data.topSearches
-    const { maxTopSearches = MAX_TOP_SEARCHES_DEFAULT } = this.props
 
-    const topSearchedItems = searches.slice(0, maxTopSearches).map(
+    const topSearchedItems = searches.slice(0, MAX_TOP_SEARCHES_DEFAULT).map(
       (query, index) =>
         ({
           prefix: (
@@ -490,6 +489,7 @@ class AutoComplete extends React.Component<
   }
 
   render() {
+    console.log('props', this.props)
     const hiddenClass =
       !this.props.isOpen || !this.hasContent()
         ? stylesCss['biggy-js-container--hidden']
