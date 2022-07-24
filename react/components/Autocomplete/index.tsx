@@ -27,6 +27,7 @@ import {
   handleProductClick,
   handleSeeAllClick,
 } from '../../utils/pixel'
+import SeeMoreButton from './components/SeeMoreButton'
 
 const MAX_TOP_SEARCHES_DEFAULT = 10
 const MAX_SUGGESTED_TERMS_DEFAULT = 9
@@ -422,21 +423,26 @@ class AutoComplete extends React.Component<
       <>
         {this.renderSuggestions()}
         <TileList
-          term={inputValueEncoded || ''}
           shelfProductCount={MAX_SUGGESTED_PRODUCTS}
           title={`Products for ${inputValue}`}
           products={products || []}
-          totalProducts={totalProducts || 0}
           isLoading={isProductsLoading}
           onProductClick={(id, position) => {
             handleProductClick(push, runtime.page)(id, position)
             this.closeModal()
           }}
-          onSeeAllClick={term => {
-            handleSeeAllClick(push, runtime.page)(term)
-            this.closeModal()
-          }}
         />
+
+        {totalProducts > 0 && (
+          <SeeMoreButton
+            term={inputValueEncoded || ''}
+            onSeeAllClick={term => {
+              handleSeeAllClick(push, runtime.page)(term)
+              this.closeModal()
+            }}
+            totalProducts={totalProducts || 0}
+          />
+        )}
       </>
     )
   }
