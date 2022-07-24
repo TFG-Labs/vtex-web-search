@@ -10,7 +10,6 @@ import debounce from 'debounce'
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
 
 import BiggyClient from '../../utils/biggy-client'
-import stylesCss from './styles.css'
 import TileList from './components/TileList/TileList'
 import {
   Item,
@@ -327,7 +326,6 @@ class AutoComplete extends React.Component<
       <ItemList
         title={titleMessage}
         items={this.state.suggestionItems || []}
-        modifier="suggestion"
         showTitle={!hasSuggestion}
         onItemHover={this.handleItemHover}
         onItemClick={(value, position) => {
@@ -346,7 +344,6 @@ class AutoComplete extends React.Component<
   contentWhenQueryIsEmpty() {
     return (
       <ItemList
-        modifier="history"
         title="Search History"
         items={this.state.history || []}
         showTitle
@@ -412,26 +409,12 @@ class AutoComplete extends React.Component<
   }
 
   render() {
-    const hiddenClass =
-      !this.props.isOpen || !this.hasContent()
-        ? stylesCss['biggy-js-container--hidden']
-        : ''
-
     return (
-      <div className={stylesCss['biggy-autocomplete-wrapper']}>
-        <section
-          ref={this.autocompleteRef}
-          // tslint:disable-next-line: max-line-length
-          className={`${stylesCss['biggy-autocomplete']} ${hiddenClass} w-100`}
-          style={{
-            flexDirection: 'column',
-          }}
-        >
-          <ProductListProvider listName="autocomplete-result-list">
-            {this.renderContent()}
-          </ProductListProvider>
-        </section>
-      </div>
+      <section ref={this.autocompleteRef}>
+        <ProductListProvider listName="autocomplete-result-list">
+          {this.renderContent()}
+        </ProductListProvider>
+      </section>
     )
   }
 }

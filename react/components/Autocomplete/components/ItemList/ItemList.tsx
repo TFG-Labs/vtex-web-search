@@ -10,7 +10,6 @@ interface ItemListProps {
   items: Item[]
   showTitle: boolean
   onItemClick: (term: string, position: number) => void
-  modifier?: string
   onItemHover?: (item: Item | AttributeItem) => void
   showTitleOnEmpty?: boolean
   closeModal: () => void
