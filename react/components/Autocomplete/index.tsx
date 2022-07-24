@@ -37,8 +37,6 @@ interface AutoCompleteProps {
   isOpen: boolean
   runtime: { page: string }
   inputValue: string
-
-  maxSuggestedTerms: number
   maxSuggestedProducts: number
   maxHistory: number
   isMobile: boolean
@@ -209,9 +207,8 @@ class AutoComplete extends React.Component<
   async updateSuggestions() {
     const result = await this.client.suggestionSearches(this.props.inputValue)
     const { searches } = result.data.autocompleteSearchSuggestions
-    const { maxSuggestedTerms = MAX_SUGGESTED_TERMS_DEFAULT } = this.props
 
-    const items = searches.slice(0, maxSuggestedTerms).map(query => {
+    const items = searches.slice(0, MAX_SUGGESTED_TERMS_DEFAULT).map(query => {
       const attributes = query.attributes || []
 
       return {
@@ -371,7 +368,6 @@ class AutoComplete extends React.Component<
         modifier="suggestion"
         showTitle={!hasSuggestion}
         onItemHover={this.handleItemHover}
-        showTitleOnEmpty={this.props.maxSuggestedTerms !== 0}
         onItemClick={(value, position) => {
           handleItemClick(
             this.props.push,
