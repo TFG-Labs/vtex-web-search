@@ -57,14 +57,13 @@ const TileList: FC<TileListProps> = ({
               )
 
               return (
-                <li key={product.productId} className={styles.tileListItem}>
-                  <CustomListItem
-                    product={productSummary}
-                    onClick={() => {
-                      onProductClick(productSummary.productId, index)
-                    }}
-                  />
-                </li>
+                <CustomListItem
+                  key={product.productId}
+                  product={productSummary}
+                  onClick={() => {
+                    onProductClick(productSummary.productId, index)
+                  }}
+                />
               )
             })}
           </ul>

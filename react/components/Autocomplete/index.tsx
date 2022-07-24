@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import React from 'react'
 import { withApollo, WithApolloClient } from 'react-apollo'
-import { IconClose, IconClock } from 'vtex.styleguide'
+import { IconClock } from 'vtex.styleguide'
 import { ProductListContext } from 'vtex.product-list-context'
 import { withDevice } from 'vtex.device-detector'
 import debounce from 'debounce'
@@ -538,14 +538,6 @@ class AutoComplete extends React.Component<
         >
           <ProductListProvider listName="autocomplete-result-list">
             {this.renderContent()}
-            {this.props.isMobile ? (
-              <button
-                onClick={() => this.closeModal()}
-                className={stylesCss['close-btn']}
-              >
-                <IconClose />
-              </button>
-            ) : null}
           </ProductListProvider>
         </section>
       </div>
