@@ -45,7 +45,6 @@ interface AutoCompleteProps {
   __unstableProductOrigin: 'BIGGY' | 'VTEX'
   __unstableProductOriginVtex: boolean
   simulationBehavior: 'default' | 'skip' | null
-  hideUnavailableItems: boolean
   push: (data: any) => void
   closeMenu: () => void
 }
@@ -248,7 +247,6 @@ class AutoComplete extends React.Component<
       __unstableProductOrigin,
       __unstableProductOriginVtex = false,
       simulationBehavior = 'default',
-      hideUnavailableItems = false,
     } = this.props
 
     const { queryFromHover } = this.state
@@ -278,7 +276,6 @@ class AutoComplete extends React.Component<
       queryFromHover ? queryFromHover.value : undefined,
       __unstableProductOrigin === 'VTEX' || __unstableProductOriginVtex,
       simulationBehavior,
-      hideUnavailableItems,
       MAX_SUGGESTED_PRODUCTS
     )
 
