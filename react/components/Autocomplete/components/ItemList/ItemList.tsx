@@ -3,7 +3,6 @@ import * as React from 'react'
 import { Link } from 'vtex.render-runtime'
 
 import { Item, AttributeItem } from './types'
-import stylesCss from './styles.css'
 import Attribute from './Attribute'
 
 interface ItemListProps {
@@ -55,23 +54,14 @@ export class ItemList extends React.Component<ItemListProps> {
       return null
     }
 
-    const modifier = this.props.modifier
-      ? stylesCss[`itemList--${this.props.modifier}`]
-      : ''
-
     return (
-      <article className={`${stylesCss.itemList} ${modifier}`}>
-        {this.props.showTitle ? (
-          <p className={`${stylesCss.itemListTitle} c-on-base`}>
-            {this.props.title}
-          </p>
-        ) : null}
-        <ol className={stylesCss.itemListList}>
+      <article>
+        {this.props.showTitle ? <p>{this.props.title}</p> : null}
+        <ol>
           {this.props.items.map((item, index) => {
             return (
               <li
                 key={item.value}
-                className={`${stylesCss.itemListItem}`}
                 onMouseOver={e => this.handleMouseOver(e, item)}
                 onFocus={e => this.handleMouseOver(e, item)}
                 onMouseOut={() => this.handleMouseOut()}
@@ -84,21 +74,12 @@ export class ItemList extends React.Component<ItemListProps> {
                   }}
                   query={`map=ft&_q=${item.value}`}
                   onClick={() => this.props.onItemClick(item.value, index)}
-                  className={stylesCss.itemListLink}
                 >
-                  {item.icon ? (
-                    <span className={stylesCss.itemListIcon}>{item.icon}</span>
-                  ) : null}
+                  {item.icon ? <span>{item.icon}</span> : null}
 
-                  {item.prefix ? (
-                    <span className={stylesCss.itemListPrefix}>
-                      {item.prefix}
-                    </span>
-                  ) : null}
+                  {item.prefix ? <span>{item.prefix}</span> : null}
 
-                  <span className={`${stylesCss.itemListLinkTitle} c-on-base`}>
-                    {item.label}
-                  </span>
+                  <span>{item.label}</span>
                 </Link>
                 <Attribute
                   item={item}
