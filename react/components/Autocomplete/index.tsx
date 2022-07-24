@@ -33,12 +33,6 @@ const MAX_SUGGESTED_TERMS_DEFAULT = 9
 const MAX_SUGGESTED_PRODUCTS = 5
 const MAX_HISTORY_DEFAULT = 5
 
-// eslint-disable-next-line no-shadow, no-restricted-syntax
-export enum ProductLayout {
-  Horizontal = 'HORIZONTAL',
-  Vertical = 'VERTICAL',
-}
-
 interface AutoCompleteProps {
   isOpen: boolean
   runtime: { page: string }
@@ -47,8 +41,7 @@ interface AutoCompleteProps {
   maxSuggestedTerms: number
   maxSuggestedProducts: number
   maxHistory: number
-  autocompleteWidth: number
-  productLayout?: ProductLayout
+
   hideTitles: boolean
   historyFirst: boolean
   isMobile: boolean
@@ -479,7 +472,6 @@ class AutoComplete extends React.Component<
           products={products || []}
           showTitle={!hideTitles}
           totalProducts={totalProducts || 0}
-          layout={ProductLayout.Horizontal}
           isLoading={isProductsLoading}
           onProductClick={(id, position) => {
             handleProductClick(push, runtime.page)(id, position)
@@ -520,14 +512,7 @@ class AutoComplete extends React.Component<
         : ''
 
     return (
-      <div
-        className={stylesCss['biggy-autocomplete-wrapper']}
-        style={{
-          width: this.props.autocompleteWidth
-            ? `${this.props.autocompleteWidth}vw`
-            : undefined,
-        }}
-      >
+      <div className={stylesCss['biggy-autocomplete-wrapper']}>
         <section
           ref={this.autocompleteRef}
           // tslint:disable-next-line: max-line-length

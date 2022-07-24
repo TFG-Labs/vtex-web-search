@@ -4,7 +4,6 @@ import ProductSummary from 'vtex.product-summary/ProductSummaryCustom'
 
 import styles from './styles.css'
 import CustomListItem from '../CustomListItem/CustomListItem'
-import { ProductLayout } from '../..'
 import SeeMoreButton from '../SeeMoreButton'
 
 interface TileListProps {
@@ -14,7 +13,6 @@ interface TileListProps {
   showTitle: boolean
   shelfProductCount: number
   totalProducts: number
-  layout: ProductLayout
   isLoading: boolean
   onProductClick: (product: string, position: number) => void
   onSeeAllClick: (term: string) => void
