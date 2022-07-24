@@ -43,7 +43,6 @@ interface AutoCompleteProps {
   maxHistory: number
 
   hideTitles: boolean
-  historyFirst: boolean
   isMobile: boolean
   __unstableProductOrigin: 'BIGGY' | 'VTEX'
   __unstableProductOriginVtex: boolean
@@ -409,50 +408,38 @@ class AutoComplete extends React.Component<
 
   contentWhenQueryIsEmpty() {
     return (
-      <div
-        className={stylesCss['history-and-top-wrapper']}
-        style={{
-          flexDirection: this.props.historyFirst ? 'row-reverse' : 'row',
-        }}
-      >
-        {!this.props.isMobile ||
-        (this.props.isMobile && !this.props.historyFirst) ||
-        this.state.history.length === 0 ? (
-          <ItemList
-            modifier="top-search"
-            title="Top Searches"
-            items={this.state.topSearchedItems || []}
-            showTitle={!this.props.hideTitles}
-            onItemClick={(value, position) => {
-              handleItemClick(
-                this.props.push,
-                this.props.runtime.page,
-                EventType.TopSearchClick
-              )(value, position)
-              this.closeModal()
-            }}
-            closeModal={() => this.closeModal()}
-          />
-        ) : null}
+      <div className={stylesCss['history-and-top-wrapper']}>
+        <ItemList
+          modifier="top-search"
+          title="Top Searches"
+          items={this.state.topSearchedItems || []}
+          showTitle={!this.props.hideTitles}
+          onItemClick={(value, position) => {
+            handleItemClick(
+              this.props.push,
+              this.props.runtime.page,
+              EventType.TopSearchClick
+            )(value, position)
+            this.closeModal()
+          }}
+          closeModal={() => this.closeModal()}
+        />
 
-        {!this.props.isMobile ||
-        (this.props.isMobile && this.props.historyFirst) ? (
-          <ItemList
-            modifier="history"
-            title="Search History"
-            items={this.state.history || []}
-            showTitle={!this.props.hideTitles}
-            onItemClick={(value, position) => {
-              handleItemClick(
-                this.props.push,
-                this.props.runtime.page,
-                EventType.HistoryClick
-              )(value, position)
-              this.closeModal()
-            }}
-            closeModal={() => this.closeModal()}
-          />
-        ) : null}
+        <ItemList
+          modifier="history"
+          title="Search History"
+          items={this.state.history || []}
+          showTitle={!this.props.hideTitles}
+          onItemClick={(value, position) => {
+            handleItemClick(
+              this.props.push,
+              this.props.runtime.page,
+              EventType.HistoryClick
+            )(value, position)
+            this.closeModal()
+          }}
+          closeModal={() => this.closeModal()}
+        />
       </div>
     )
   }
