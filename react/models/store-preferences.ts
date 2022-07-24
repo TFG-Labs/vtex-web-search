@@ -20,7 +20,6 @@ export interface TilePreferences {
 export interface AutoCompletePreferences {
   productCount: number
   inputPlaceHolder: string
-  topSearchedListTitle: string
   historyListTitle: string
   suggestionListTitle: string
   emptySuggestionListTitle: string

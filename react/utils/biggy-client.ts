@@ -1,7 +1,6 @@
 import ApolloClient, { ApolloQueryResult } from 'apollo-client'
 import suggestionProducts from 'vtex.store-resources/QuerySuggestionProducts'
 import suggestionSearches from 'vtex.store-resources/QueryAutocompleteSearchSuggestions'
-import topSearches from 'vtex.store-resources/QueryTopSearches'
 
 import { getCookie, setCookie } from './dom-utils'
 import { ISearchProduct } from '../models/search-product'
@@ -10,14 +9,6 @@ export default class BiggyClient {
   private historyKey = 'biggy-search-history'
 
   constructor(private client: ApolloClient<any>) {}
-
-  public async topSearches(): Promise<
-    ApolloQueryResult<{ topSearches: ISearchesOutput }>
-  > {
-    return this.client.query({
-      query: topSearches,
-    })
-  }
 
   public async suggestionSearches(
     term: string

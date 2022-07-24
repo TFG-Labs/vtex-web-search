@@ -29,7 +29,6 @@ import {
 } from '../../utils/pixel'
 import SeeMoreButton from './components/SeeMoreButton'
 
-const MAX_TOP_SEARCHES_DEFAULT = 10
 const MAX_SUGGESTED_TERMS_DEFAULT = 9
 const MAX_SUGGESTED_PRODUCTS = 5
 const MAX_HISTORY_DEFAULT = 5
@@ -43,7 +42,6 @@ interface AutoCompleteProps {
 }
 
 interface AutoCompleteState {
-  topSearchedItems: Item[]
   suggestionItems: Item[]
   history: Item[]
   products: any[]
@@ -65,7 +63,6 @@ class AutoComplete extends React.Component<
   isIOS: boolean
 
   public readonly state: AutoCompleteState = {
-    topSearchedItems: [],
     history: [],
     products: [],
     suggestionItems: [],
@@ -110,7 +107,6 @@ class AutoComplete extends React.Component<
   }
 
   componentDidMount() {
-    this.updateTopSearches()
     this.updateHistory()
     this.addEvents()
   }
@@ -158,7 +154,6 @@ class AutoComplete extends React.Component<
     })
 
     if (inputValue === null || inputValue === '') {
-      this.updateTopSearches()
       this.updateHistory()
 
       this.setState({
@@ -282,28 +277,6 @@ class AutoComplete extends React.Component<
     })
   }
 
-  async updateTopSearches() {
-    const result = await this.client.topSearches()
-    const { searches } = result.data.topSearches
-
-    const topSearchedItems = searches.slice(0, MAX_TOP_SEARCHES_DEFAULT).map(
-      (query, index) =>
-        ({
-          prefix: (
-            <>
-              {`${index + 1}.`}
-              ------
-            </>
-          ),
-          value: query.term,
-          label: query.term,
-          link: `/${query.term}?map=ft`,
-        } as Item)
-    )
-
-    this.setState({ topSearchedItems })
-  }
-
   updateHistory() {
     const history = this.client
       .searchHistory()
@@ -372,39 +345,21 @@ class AutoComplete extends React.Component<
 
   contentWhenQueryIsEmpty() {
     return (
-      <div className={stylesCss['history-and-top-wrapper']}>
-        <ItemList
-          modifier="top-search"
-          title="Top Searches"
-          items={this.state.topSearchedItems || []}
-          showTitle
-          onItemClick={(value, position) => {
-            handleItemClick(
-              this.props.push,
-              this.props.runtime.page,
-              EventType.TopSearchClick
-            )(value, position)
-            this.closeModal()
-          }}
-          closeModal={() => this.closeModal()}
-        />
-
-        <ItemList
-          modifier="history"
-          title="Search History"
-          items={this.state.history || []}
-          showTitle
-          onItemClick={(value, position) => {
-            handleItemClick(
-              this.props.push,
-              this.props.runtime.page,
-              EventType.HistoryClick
-            )(value, position)
-            this.closeModal()
-          }}
-          closeModal={() => this.closeModal()}
-        />
-      </div>
+      <ItemList
+        modifier="history"
+        title="Search History"
+        items={this.state.history || []}
+        showTitle
+        onItemClick={(value, position) => {
+          handleItemClick(
+            this.props.push,
+            this.props.runtime.page,
+            EventType.HistoryClick
+          )(value, position)
+          this.closeModal()
+        }}
+        closeModal={() => this.closeModal()}
+      />
     )
   }
 
@@ -449,18 +404,14 @@ class AutoComplete extends React.Component<
   }
 
   hasContent() {
-    const { topSearchedItems, suggestionItems, history, products } = this.state
+    const { suggestionItems, history, products } = this.state
 
     return (
-      topSearchedItems.length > 0 ||
-      suggestionItems.length > 0 ||
-      history.length > 0 ||
-      products.length > 0
+      suggestionItems.length > 0 || history.length > 0 || products.length > 0
     )
   }
 
   render() {
-    console.log('hoot')
     const hiddenClass =
       !this.props.isOpen || !this.hasContent()
         ? stylesCss['biggy-js-container--hidden']
