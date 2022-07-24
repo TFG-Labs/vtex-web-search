@@ -5,7 +5,6 @@ import React from 'react'
 import { withApollo, WithApolloClient } from 'react-apollo'
 import { ProductListContext } from 'vtex.product-list-context'
 import { withDevice } from 'vtex.device-detector'
-import debounce from 'debounce'
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
 
 import BiggyClient from '../../utils/biggy-client'
@@ -27,7 +26,6 @@ const MAX_SUGGESTED_PRODUCTS = 5
 const MAX_HISTORY_DEFAULT = 5
 
 interface AutoCompleteProps {
-  isOpen: boolean
   runtime: { page: string }
   inputValue: string
   push: (data: any) => void
@@ -41,7 +39,6 @@ interface AutoCompleteState {
   totalProducts: number
   dynamicTerm: string
   isProductsLoading: boolean
-  currentHeightWhenOpen: number
 }
 
 const { ProductListProvider } = ProductListContext
@@ -50,9 +47,7 @@ class AutoComplete extends React.Component<
   WithApolloClient<AutoCompleteProps>,
   Partial<AutoCompleteState>
 > {
-  autocompleteRef: React.RefObject<any>
   client: BiggyClient
-  isIOS: boolean
 
   public readonly state: AutoCompleteState = {
     history: [],
@@ -62,52 +57,20 @@ class AutoComplete extends React.Component<
 
     dynamicTerm: '',
     isProductsLoading: false,
-    currentHeightWhenOpen: 0,
   }
 
   constructor(props: WithApolloClient<AutoCompleteProps>) {
     super(props)
 
     this.client = new BiggyClient(this.props.client)
-    this.autocompleteRef = React.createRef()
-    this.isIOS = navigator && !!navigator.userAgent.match(/(iPod|iPhone|iPad)/)
-  }
-
-  fitAutocompleteInWindow() {
-    if (!window || !this.autocompleteRef.current || this.isIOS) {
-      return
-    }
-
-    const windowHeight = window.innerHeight
-    const autocompletePosition = this.autocompleteRef.current.getBoundingClientRect()
-      .y
-
-    const autocompleteHeight = this.autocompleteRef.current.offsetHeight
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    const autocompleteEnd = autocompletePosition + autocompleteHeight
-
-    const currentHeight = autocompleteHeight - (autocompleteEnd - windowHeight)
-
-    this.autocompleteRef.current.style.maxHeight = `${currentHeight}px`
-  }
-
-  addEvents() {
-    window.addEventListener(
-      'resize',
-      debounce(this.fitAutocompleteInWindow.bind(this), 100)
-    )
   }
 
   componentDidMount() {
     this.updateHistory()
-    this.addEvents()
   }
 
   shouldUpdate(prevProps: AutoCompleteProps) {
-    return (
-      prevProps.inputValue !== this.props.inputValue ||
-      (!prevProps.isOpen && this.props.isOpen)
-    )
+    return prevProps.inputValue !== this.props.inputValue
   }
 
   addTermToHistory() {
@@ -136,7 +99,6 @@ class AutoComplete extends React.Component<
     }
 
     this.addTermToHistory()
-    this.fitAutocompleteInWindow()
 
     const { inputValue } = this.props
 
@@ -152,13 +114,9 @@ class AutoComplete extends React.Component<
         products: [],
       })
     } else {
-      this.updateSuggestions()
-        .then(() => {
-          this.fitAutocompleteInWindow()
-
-          return this.updateProducts()
-        })
-        .then(() => this.fitAutocompleteInWindow())
+      this.updateSuggestions().then(() => {
+        return this.updateProducts()
+      })
     }
   }
 
@@ -354,7 +312,7 @@ class AutoComplete extends React.Component<
 
   render() {
     return (
-      <section ref={this.autocompleteRef}>
+      <section>
         <ProductListProvider listName="autocomplete-result-list">
           {this.renderContent()}
         </ProductListProvider>
