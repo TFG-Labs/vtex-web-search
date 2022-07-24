@@ -11,11 +11,7 @@ import { withPixel } from 'vtex.pixel-manager/PixelContext'
 
 import BiggyClient from '../../utils/biggy-client'
 import TileList from './components/TileList/TileList'
-import {
-  Item,
-  instanceOfAttributeItem,
-  AttributeItem,
-} from './components/ItemList/types'
+import { Item } from './components/ItemList/types'
 import { ItemList } from './components/ItemList/ItemList'
 import { withRuntime } from '../../utils/withRuntime'
 import { decodeUrlString, encodeUrlString } from '../../utils/string-utils'
@@ -294,28 +290,6 @@ class AutoComplete extends React.Component<
     })
   }
 
-  handleItemHover = (item: Item | AttributeItem) => {
-    if (instanceOfAttributeItem(item)) {
-      this.setState({
-        dynamicTerm: item.groupValue,
-        queryFromHover: {
-          key: item.key,
-          value: item.value,
-        },
-      })
-    } else {
-      this.setState({
-        dynamicTerm: item.value,
-        queryFromHover: {
-          key: undefined,
-          value: undefined,
-        },
-      })
-    }
-
-    this.updateProducts()
-  }
-
   renderSuggestions() {
     const hasSuggestion =
       !!this.state.suggestionItems && this.state.suggestionItems.length > 0
@@ -327,7 +301,6 @@ class AutoComplete extends React.Component<
         title={titleMessage}
         items={this.state.suggestionItems || []}
         showTitle={!hasSuggestion}
-        onItemHover={this.handleItemHover}
         onItemClick={(value, position) => {
           handleItemClick(
             this.props.push,
@@ -398,14 +371,6 @@ class AutoComplete extends React.Component<
     return query && query !== ''
       ? this.contentWhenQueryIsNotEmpty()
       : this.contentWhenQueryIsEmpty()
-  }
-
-  hasContent() {
-    const { suggestionItems, history, products } = this.state
-
-    return (
-      suggestionItems.length > 0 || history.length > 0 || products.length > 0
-    )
   }
 
   render() {

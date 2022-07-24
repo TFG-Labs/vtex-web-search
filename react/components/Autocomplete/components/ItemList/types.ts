@@ -14,7 +14,3 @@ export interface AttributeItem {
   link: string
   key: string
 }
-
-export function instanceOfAttributeItem(object: any): object is AttributeItem {
-  return 'groupValue' in object
-}
