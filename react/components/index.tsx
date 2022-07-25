@@ -7,20 +7,20 @@ import { ProductListContext } from 'vtex.product-list-context'
 import { withDevice } from 'vtex.device-detector'
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
 
-import BiggyClient from '../../utils/biggy-client'
-import TileList from './components/TileList/TileList'
-import { Item } from './components/SuggestionSection/types'
-import SuggestionSection from '../SuggestionSection'
-import { withRuntime } from '../../utils/withRuntime'
-import { decodeUrlString, encodeUrlString } from '../../utils/string-utils'
+import BiggyClient from '../utils/biggy-client'
+import TileList from './Autocomplete/components/TileList/TileList'
+import { Item } from './Autocomplete/components/SuggestionSection/types'
+import SuggestionSection from './SuggestionSection'
+import { withRuntime } from '../utils/withRuntime'
+import { decodeUrlString, encodeUrlString } from '../utils/string-utils'
 import {
   EventType,
   handleItemClick,
   handleProductClick,
   handleSeeAllClick,
-} from '../../utils/pixel'
-import SeeMoreButton from './components/SeeMoreButton'
-import SearchHistory from '../SearchHistory'
+} from '../utils/pixel'
+import SeeMoreButton from './Autocomplete/components/SeeMoreButton'
+import SearchHistory from './SearchHistory'
 
 const MAX_SUGGESTED_TERMS_DEFAULT = 9
 const MAX_SUGGESTED_PRODUCTS = 5
