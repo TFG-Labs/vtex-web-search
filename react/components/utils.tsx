@@ -64,7 +64,7 @@ export const transformSearchSuggestions = (
 }
 
 /**
- * Take the returned history and transform it n
+ * Take the returned history and transform it a result that can displayed
  */
 export const transformSearchHistory = (searchItems: string[]) => {
   const MAX_HISTORY = 5

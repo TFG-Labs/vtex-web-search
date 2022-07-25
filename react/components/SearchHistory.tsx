@@ -1,26 +1,21 @@
 import React, { FC } from 'react'
 import { Link } from 'vtex.render-runtime'
-
-interface SearchHistoryItem {
-  label: string | JSX.Element
-  value: string
-  link: string
-}
+import { searchHistory, transformSearchHistory } from './utils'
 
 interface SearchHistoryProps {
-  items: SearchHistoryItem[]
   onItemClick: (term: string, position: number) => void
 }
 const SearchHistory: FC<SearchHistoryProps> = props => {
-  const { items } = props
+  const history = searchHistory()
+  const historyItems = transformSearchHistory(history)
 
   return (
     <article>
-      <p>Recent</p>
+      <p>Recently</p>
       <hr />
 
       <ol>
-        {items.map((item, i) => (
+        {historyItems.map((item, i) => (
           <li key={item.value}>
             <Link
               page="store.search"

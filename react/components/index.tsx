@@ -21,12 +21,7 @@ import {
 } from '../utils/pixel'
 import SeeMoreButton from './Autocomplete/components/SeeMoreButton'
 import SearchHistory from './SearchHistory'
-import {
-  prependSearchHistory,
-  searchHistory,
-  transformSearchHistory,
-  transformSearchSuggestions,
-} from './utils'
+import { prependSearchHistory, transformSearchSuggestions } from './utils'
 
 const MAX_SUGGESTED_PRODUCTS = 5
 
@@ -39,7 +34,6 @@ interface AutoCompleteProps {
 
 interface AutoCompleteState {
   suggestionItems: Item[]
-  history: Item[]
   products: any[]
   totalProducts: number
   dynamicTerm: string
@@ -55,7 +49,6 @@ class AutoComplete extends React.Component<
   client: BiggyClient
 
   public readonly state: AutoCompleteState = {
-    history: [],
     products: [],
     suggestionItems: [],
     totalProducts: 0,
@@ -68,10 +61,6 @@ class AutoComplete extends React.Component<
     super(props)
 
     this.client = new BiggyClient(this.props.client)
-  }
-
-  componentDidMount() {
-    this.updateHistory()
   }
 
   shouldUpdate(prevProps: AutoCompleteProps) {
@@ -112,8 +101,6 @@ class AutoComplete extends React.Component<
     })
 
     if (inputValue === null || inputValue === '') {
-      this.updateHistory()
-
       this.setState({
         suggestionItems: [],
         products: [],
@@ -174,14 +161,6 @@ class AutoComplete extends React.Component<
     })
   }
 
-  updateHistory() {
-    const history = searchHistory()
-
-    this.setState({
-      history: transformSearchHistory(history),
-    })
-  }
-
   contentWhenQueryIsNotEmpty() {
     const { products, totalProducts, isProductsLoading } = this.state
     const { push, runtime, inputValue } = this.props
@@ -232,7 +211,6 @@ class AutoComplete extends React.Component<
       <section style={{ width: '500px', backgroundColor: 'lightgrey' }}>
         <ProductListProvider listName="autocomplete-result-list">
           <SearchHistory
-            items={this.state.history || []}
             onItemClick={(value, position) => {
               handleItemClick(
                 this.props.push,
