@@ -20,6 +20,7 @@ import {
   handleSeeAllClick,
 } from '../../utils/pixel'
 import SeeMoreButton from './components/SeeMoreButton'
+import SearchHistory from '../SearchHistory'
 
 const MAX_SUGGESTED_TERMS_DEFAULT = 9
 const MAX_SUGGESTED_PRODUCTS = 5
@@ -251,25 +252,6 @@ class AutoComplete extends React.Component<
     )
   }
 
-  contentWhenQueryIsEmpty() {
-    return (
-      <ItemList
-        title="Search History"
-        items={this.state.history || []}
-        showTitle
-        onItemClick={(value, position) => {
-          handleItemClick(
-            this.props.push,
-            this.props.runtime.page,
-            EventType.HistoryClick
-          )(value, position)
-          this.closeModal()
-        }}
-        closeModal={() => this.closeModal()}
-      />
-    )
-  }
-
   contentWhenQueryIsNotEmpty() {
     const { products, totalProducts, isProductsLoading } = this.state
     const { push, runtime, inputValue } = this.props
@@ -302,19 +284,28 @@ class AutoComplete extends React.Component<
     )
   }
 
-  renderContent() {
-    const query = this.props.inputValue.trim()
-
-    return query && query !== ''
-      ? this.contentWhenQueryIsNotEmpty()
-      : this.contentWhenQueryIsEmpty()
-  }
-
   render() {
+    const query = this.props.inputValue.trim()
+    const hasQuery = query && query !== ''
+
     return (
       <section>
         <ProductListProvider listName="autocomplete-result-list">
-          {this.renderContent()}
+          {hasQuery ? (
+            this.contentWhenQueryIsNotEmpty()
+          ) : (
+            <SearchHistory
+              items={this.state.history || []}
+              onItemClick={(value, position) => {
+                handleItemClick(
+                  this.props.push,
+                  this.props.runtime.page,
+                  EventType.HistoryClick
+                )(value, position)
+                this.closeModal()
+              }}
+            />
+          )}
         </ProductListProvider>
       </section>
     )

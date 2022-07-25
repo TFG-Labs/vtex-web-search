@@ -35,8 +35,6 @@ export class ItemList extends React.Component<ItemListProps> {
                   query={`map=ft&_q=${item.value}`}
                   onClick={() => this.props.onItemClick(item.value, index)}
                 >
-                  {item.prefix ? <span>{item.prefix}</span> : null}
-
                   <span>{item.label}</span>
                 </Link>
                 <Attribute item={item} closeModal={this.props.closeModal} />
