@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import ProductSummary from 'vtex.product-summary/ProductSummaryCustom'
-
-import CustomListItem from './CustomListItem'
+import { Link } from 'vtex.render-runtime'
 
 interface ProductResultsProps {
   products: any[]
@@ -15,7 +14,7 @@ const ProductResults: FC<ProductResultsProps> = ({
   onProductClick,
 }) => {
   if (!products.length && !isLoading) return null
-  if (isLoading) return <div>loading</div>
+  if (isLoading) return <div>loader</div>
 
   console.log('raw products', products)
   return (
@@ -26,14 +25,29 @@ const ProductResults: FC<ProductResultsProps> = ({
             product
           )
 
+          const sku = productSummary?.sku
+
           return (
-            <CustomListItem
-              key={product.productId}
-              product={productSummary}
+            <Link
+              key={index}
+              params={{
+                slug: productSummary?.linkText,
+                id: productSummary?.productId,
+              }}
+              page="store.product"
+              className="no-underline"
               onClick={() => {
                 onProductClick(productSummary.productId, index)
               }}
-            />
+            >
+              <div>
+                <img
+                  src={sku?.image?.imageUrl}
+                  alt={sku?.image?.imageLabel ?? ''}
+                />
+                {productSummary.productName}
+              </div>
+            </Link>
           )
         })}
       </ul>
