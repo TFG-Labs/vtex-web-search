@@ -16,40 +16,35 @@ const ProductResults: FC<ProductResultsProps> = ({
   if (!products.length && !isLoading) return null
   if (isLoading) return <div>loader</div>
 
-  console.log('raw products', products)
+  const productSummaryItems: Product[] = products.map(product =>
+    ProductSummary.mapCatalogProductToProductSummary(product)
+  )
+
   return (
     <section>
       <ul>
-        {products.map((product, index: number) => {
-          const productSummary: Product = ProductSummary.mapCatalogProductToProductSummary(
-            product
-          )
-
-          const sku = productSummary?.sku
-
-          return (
-            <Link
-              key={index}
-              params={{
-                slug: productSummary?.linkText,
-                id: productSummary?.productId,
-              }}
-              page="store.product"
-              className="no-underline"
-              onClick={() => {
-                onProductClick(productSummary.productId, index)
-              }}
-            >
-              <div>
-                <img
-                  src={sku?.image?.imageUrl}
-                  alt={sku?.image?.imageLabel ?? ''}
-                />
-                {productSummary.productName}
-              </div>
-            </Link>
-          )
-        })}
+        {productSummaryItems.map((product, index: number) => (
+          <Link
+            key={index}
+            params={{
+              slug: product?.linkText,
+              id: product?.productId,
+            }}
+            page="store.product"
+            className="no-underline"
+            onClick={() => {
+              onProductClick(product.productId, index)
+            }}
+          >
+            <div>
+              <img
+                src={product?.sku?.image?.imageUrl}
+                alt={product?.sku?.image?.imageLabel ?? ''}
+              />
+              {product.productName}
+            </div>
+          </Link>
+        ))}
       </ul>
     </section>
   )
