@@ -21,6 +21,7 @@ import {
 } from '../utils/pixel'
 import SeeMoreButton from './Autocomplete/components/SeeMoreButton'
 import SearchHistory from './SearchHistory'
+import { highlightTerm } from './utils'
 
 const MAX_SUGGESTED_TERMS_DEFAULT = 9
 const MAX_SUGGESTED_PRODUCTS = 5
@@ -121,25 +122,6 @@ class AutoComplete extends React.Component<
     }
   }
 
-  highlightTerm(label: string, query: string) {
-    const splittedLabel = label.split(query)
-
-    return (
-      <>
-        {splittedLabel.map((str: string, index: number) => {
-          return (
-            <>
-              {str}
-              {index !== splittedLabel.length - 1 ? (
-                <span className="b">{query}</span>
-              ) : null}
-            </>
-          )
-        })}
-      </>
-    )
-  }
-
   async updateSuggestions() {
     const result = await this.client.suggestionSearches(this.props.inputValue)
     const { searches } = result.data.autocompleteSearchSuggestions
@@ -160,7 +142,7 @@ class AutoComplete extends React.Component<
     })
 
     const suggestionItems: Item[] = items.map(suggestion => ({
-      label: this.highlightTerm(
+      label: highlightTerm(
         suggestion.term.toLowerCase(),
         this.props.inputValue.toLocaleLowerCase()
       ),
