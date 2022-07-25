@@ -21,7 +21,12 @@ import {
 } from '../utils/pixel'
 import SeeMoreButton from './Autocomplete/components/SeeMoreButton'
 import SearchHistory from './SearchHistory'
-import { transformSearchHistory, transformSearchSuggestions } from './utils'
+import {
+  prependSearchHistory,
+  searchHistory,
+  transformSearchHistory,
+  transformSearchSuggestions,
+} from './utils'
 
 const MAX_SUGGESTED_PRODUCTS = 5
 
@@ -80,9 +85,9 @@ class AutoComplete extends React.Component<
       const term = path[1].split('&')[0]
 
       try {
-        return this.client.prependSearchHistory(decodeURI(term))
+        prependSearchHistory(decodeURI(term))
       } catch {
-        return this.client.prependSearchHistory(term)
+        prependSearchHistory(term)
       }
     }
   }
@@ -170,7 +175,7 @@ class AutoComplete extends React.Component<
   }
 
   updateHistory() {
-    const history = this.client.searchHistory()
+    const history = searchHistory()
 
     this.setState({
       history: transformSearchHistory(history),
@@ -180,7 +185,6 @@ class AutoComplete extends React.Component<
   contentWhenQueryIsNotEmpty() {
     const { products, totalProducts, isProductsLoading } = this.state
     const { push, runtime, inputValue } = this.props
-    const inputValueEncoded = encodeUrlString(inputValue)
 
     return (
       <>
@@ -208,7 +212,7 @@ class AutoComplete extends React.Component<
 
         {totalProducts > 0 && (
           <SeeMoreButton
-            term={inputValueEncoded || ''}
+            term={encodeUrlString(inputValue) || ''}
             onSeeAllClick={term => {
               handleSeeAllClick(push, runtime.page)(term)
               this.closeModal()

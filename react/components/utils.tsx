@@ -2,6 +2,8 @@ import React from 'react'
 import { ISuggestionQueryResponseSearch } from '../utils/biggy-client'
 import { Item } from './Autocomplete/components/SuggestionSection/types'
 import { decodeUrlString } from '../utils/string-utils'
+import { getCookie, setCookie } from '../utils/dom-utils'
+
 /**
  * Given a query and a label: wrap the term in a bold span for styling
  */
@@ -76,4 +78,33 @@ export const transformSearchHistory = (searchItems: string[]) => {
   })
 
   return result
+}
+
+const HISTORY_KEY = 'biggy-search-history'
+
+/**
+ * Get the search history from cookies
+ */
+export const searchHistory = () => {
+  const history = getCookie(HISTORY_KEY) ?? ''
+
+  return history.split(',').filter(x => !!x)
+}
+
+/**
+ * Add terms to the search history
+ */
+export const prependSearchHistory = (term: string, limit = 5) => {
+  if (term == null || term.trim() === '') {
+    return
+  }
+
+  let history = searchHistory()
+
+  if (history.indexOf(term) < 0) {
+    history.unshift(term)
+    history = history.slice(0, limit)
+  }
+
+  setCookie(HISTORY_KEY, history.join(','))
 }

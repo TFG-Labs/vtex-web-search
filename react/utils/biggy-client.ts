@@ -2,12 +2,9 @@ import ApolloClient, { ApolloQueryResult } from 'apollo-client'
 import suggestionProducts from 'vtex.store-resources/QuerySuggestionProducts'
 import suggestionSearches from 'vtex.store-resources/QueryAutocompleteSearchSuggestions'
 
-import { getCookie, setCookie } from './dom-utils'
 import { ISearchProduct } from '../models/search-product'
 
 export default class BiggyClient {
-  private historyKey = 'biggy-search-history'
-
   constructor(private client: ApolloClient<any>) {}
 
   public async suggestionSearches(
@@ -41,27 +38,6 @@ export default class BiggyClient {
       },
       fetchPolicy: 'network-only',
     })
-  }
-
-  public searchHistory(): string[] {
-    const history = getCookie(this.historyKey) || ''
-
-    return history.split(',').filter(x => !!x)
-  }
-
-  public prependSearchHistory(term: string, limit = 5) {
-    if (term == null || term.trim() === '') {
-      return
-    }
-
-    let history = this.searchHistory()
-
-    if (history.indexOf(term) < 0) {
-      history.unshift(term)
-      history = history.slice(0, limit)
-    }
-
-    setCookie(this.historyKey, history.join(','))
   }
 }
 
