@@ -8,7 +8,7 @@ import { withDevice } from 'vtex.device-detector'
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
 
 import BiggyClient from '../utils/biggy-client'
-import TileList from './Autocomplete/components/TileList/TileList'
+import ProductResults from './ProductResults'
 import { Item } from './Autocomplete/components/SuggestionSection/types'
 import SuggestionSection from './SuggestionSection'
 import { withRuntime } from '../utils/withRuntime'
@@ -179,7 +179,7 @@ class AutoComplete extends React.Component<
           }}
           closeModal={() => this.closeModal()}
         />
-        <TileList
+        <ProductResults
           title={`Products for ${inputValue}`}
           products={products || []}
           isLoading={isProductsLoading}

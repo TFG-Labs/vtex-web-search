@@ -1,19 +1,18 @@
 import React, { FC } from 'react'
 import ProductSummary from 'vtex.product-summary/ProductSummaryCustom'
 
-import CustomListItem from '../CustomListItem/CustomListItem'
+import CustomListItem from './Autocomplete/components/CustomListItem/CustomListItem'
 
-interface TileListProps {
+interface ProductResultsProps {
   title: string
   products: any[]
   isLoading: boolean
   onProductClick: (product: string, position: number) => void
 }
 
-const TileList: FC<TileListProps> = ({
+const ProductResults: FC<ProductResultsProps> = ({
   title,
   products,
-
   isLoading,
   onProductClick,
 }) => {
@@ -51,4 +50,4 @@ const TileList: FC<TileListProps> = ({
   )
 }
 
-export default TileList
+export default ProductResults
