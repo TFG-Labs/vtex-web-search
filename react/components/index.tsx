@@ -12,7 +12,7 @@ import TileList from './Autocomplete/components/TileList/TileList'
 import { Item } from './Autocomplete/components/SuggestionSection/types'
 import SuggestionSection from './SuggestionSection'
 import { withRuntime } from '../utils/withRuntime'
-import { decodeUrlString, encodeUrlString } from '../utils/string-utils'
+import { encodeUrlString } from '../utils/string-utils'
 import {
   EventType,
   handleItemClick,
@@ -21,10 +21,9 @@ import {
 } from '../utils/pixel'
 import SeeMoreButton from './Autocomplete/components/SeeMoreButton'
 import SearchHistory from './SearchHistory'
-import { transformSearchSuggestions } from './utils'
+import { transformSearchHistory, transformSearchSuggestions } from './utils'
 
 const MAX_SUGGESTED_PRODUCTS = 5
-const MAX_HISTORY_DEFAULT = 5
 
 interface AutoCompleteProps {
   runtime: { page: string }
@@ -171,19 +170,10 @@ class AutoComplete extends React.Component<
   }
 
   updateHistory() {
-    const history = this.client
-      .searchHistory()
-      .slice(0, MAX_HISTORY_DEFAULT)
-      .map((item: string) => {
-        return {
-          label: decodeUrlString(item),
-          value: item,
-          link: `/${item}?map=ft`,
-        }
-      })
+    const history = this.client.searchHistory()
 
     this.setState({
-      history,
+      history: transformSearchHistory(history),
     })
   }
 
@@ -231,13 +221,24 @@ class AutoComplete extends React.Component<
   }
 
   render() {
-    const query = this.props.inputValue.trim()
-    const hasQuery = query && query !== ''
+    // const query = this.props.inputValue.trim()
+    // const hasQuery = query && query !== ''
 
     return (
-      <section>
+      <section style={{ width: '500px', backgroundColor: 'lightgrey' }}>
         <ProductListProvider listName="autocomplete-result-list">
-          {hasQuery ? (
+          <SearchHistory
+            items={this.state.history || []}
+            onItemClick={(value, position) => {
+              handleItemClick(
+                this.props.push,
+                this.props.runtime.page,
+                EventType.HistoryClick
+              )(value, position)
+              this.closeModal()
+            }}
+          />
+          {/* {hasQuery ? (
             this.contentWhenQueryIsNotEmpty()
           ) : (
             <SearchHistory
@@ -251,7 +252,7 @@ class AutoComplete extends React.Component<
                 this.closeModal()
               }}
             />
-          )}
+          )} */}
         </ProductListProvider>
       </section>
     )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { ISuggestionQueryResponseSearch } from '../utils/biggy-client'
 import { Item } from './Autocomplete/components/SuggestionSection/types'
-
+import { decodeUrlString } from '../utils/string-utils'
 /**
  * Given a query and a label: wrap the term in a bold span for styling
  */
@@ -59,4 +59,21 @@ export const transformSearchSuggestions = (
   }))
 
   return suggestionItems
+}
+
+/**
+ * Take the returned history and transform it n
+ */
+export const transformSearchHistory = (searchItems: string[]) => {
+  const MAX_HISTORY = 5
+
+  const result = searchItems.slice(0, MAX_HISTORY).map((item: string) => {
+    return {
+      label: decodeUrlString(item),
+      value: item,
+      link: `/${item}?map=ft`,
+    }
+  })
+
+  return result
 }
