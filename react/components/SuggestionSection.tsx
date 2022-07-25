@@ -40,4 +40,5 @@ const SuggestionSection: FC<SuggestionSectionProps> = props => {
     </article>
   )
 }
+
 export default SuggestionSection

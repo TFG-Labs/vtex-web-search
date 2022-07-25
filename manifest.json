@@ -31,7 +31,7 @@
     "vtex.search-resolver": "1.x",
     "vtex.device-detector": "0.x",
     "vtex.search-page-context": "0.x",
-    "vtex.css-handles": "0.x",
+    "vtex.css-handles": "1.x",
     "vtex.product-price": "1.x",
     "vtex.pixel-manager": "1.x",
     "vtex.tester-hub": "0.x"
