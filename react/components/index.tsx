@@ -141,15 +141,15 @@ class AutoComplete extends React.Component<
       }
     })
 
-    const suggestionItems: Item[] = items.map(suggestion => ({
+    const suggestionItems: Item[] = items.map(({ term, attributes }) => ({
       label: highlightTerm(
-        suggestion.term.toLowerCase(),
+        term.toLowerCase(),
         this.props.inputValue.toLocaleLowerCase()
       ),
-      value: suggestion.term,
-      groupValue: suggestion.term,
-      link: `/${suggestion.term}?map=ft`,
-      attributes: suggestion.attributes,
+      value: term,
+      groupValue: term,
+      link: `/${term}?map=ft`,
+      attributes,
     }))
 
     this.setState({ suggestionItems })
