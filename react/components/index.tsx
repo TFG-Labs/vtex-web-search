@@ -21,9 +21,8 @@ import {
 } from '../utils/pixel'
 import SeeMoreButton from './Autocomplete/components/SeeMoreButton'
 import SearchHistory from './SearchHistory'
-import { highlightTerm } from './utils'
+import { transformSearchSuggestions } from './utils'
 
-const MAX_SUGGESTED_TERMS_DEFAULT = 9
 const MAX_SUGGESTED_PRODUCTS = 5
 const MAX_HISTORY_DEFAULT = 5
 
@@ -126,31 +125,9 @@ class AutoComplete extends React.Component<
     const result = await this.client.suggestionSearches(this.props.inputValue)
     const { searches } = result.data.autocompleteSearchSuggestions
 
-    const items = searches.slice(0, MAX_SUGGESTED_TERMS_DEFAULT).map(query => {
-      const attributes = query.attributes || []
+    const query = this.props.inputValue.toLocaleLowerCase()
 
-      return {
-        term: query.term,
-        attributes: attributes.map(att => ({
-          label: att.labelValue,
-          value: att.value,
-          link: `/${query.term}/${att.value}/?map=ft,${att.key}`,
-          groupValue: query.term,
-          key: att.key,
-        })),
-      }
-    })
-
-    const suggestionItems: Item[] = items.map(({ term, attributes }) => ({
-      label: highlightTerm(
-        term.toLowerCase(),
-        this.props.inputValue.toLocaleLowerCase()
-      ),
-      value: term,
-      groupValue: term,
-      link: `/${term}?map=ft`,
-      attributes,
-    }))
+    const suggestionItems = transformSearchSuggestions(searches, query)
 
     this.setState({ suggestionItems })
   }

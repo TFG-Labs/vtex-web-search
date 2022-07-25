@@ -76,7 +76,7 @@ interface IProductsOutput {
   operator: string
 }
 
-interface ISuggestionQueryResponseSearch {
+export interface ISuggestionQueryResponseSearch {
   term: string
   count: number
   attributes: IElasticProductText[]
