@@ -204,27 +204,16 @@ class AutoComplete extends React.Component<
   }
 
   render() {
-    // const query = this.props.inputValue.trim()
-    // const hasQuery = query && query !== ''
+    const query = this.props.inputValue.trim()
+    const hasQuery = query && query !== ''
 
     return (
-      <section style={{ width: '500px', backgroundColor: 'lightgrey' }}>
+      <section style={{ width: '500px', backgroundColor: 'white' }}>
         <ProductListProvider listName="autocomplete-result-list">
-          <SearchHistory
-            onItemClick={(value, position) => {
-              handleItemClick(
-                this.props.push,
-                this.props.runtime.page,
-                EventType.HistoryClick
-              )(value, position)
-              this.closeModal()
-            }}
-          />
-          {/* {hasQuery ? (
+          {hasQuery ? (
             this.contentWhenQueryIsNotEmpty()
           ) : (
             <SearchHistory
-              items={this.state.history || []}
               onItemClick={(value, position) => {
                 handleItemClick(
                   this.props.push,
@@ -234,7 +223,7 @@ class AutoComplete extends React.Component<
                 this.closeModal()
               }}
             />
-          )} */}
+          )}
         </ProductListProvider>
       </section>
     )

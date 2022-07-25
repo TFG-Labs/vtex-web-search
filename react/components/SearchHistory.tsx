@@ -7,7 +7,13 @@ interface SearchHistoryProps {
   onItemClick: (term: string, position: number) => void
 }
 
-const CSS_HANDLES = ['searchHistoryWrapper', 'searchHistoryLink'] as const
+const CSS_HANDLES = [
+  'searchHistoryWrapper',
+  'searchHistoryLink',
+  'searchHistoryTitle',
+  'searchHistoryLi',
+  'searchHistoryOl',
+] as const
 
 const SearchHistory: FC<SearchHistoryProps> = props => {
   const { handles } = useCssHandles(CSS_HANDLES)
@@ -16,12 +22,10 @@ const SearchHistory: FC<SearchHistoryProps> = props => {
 
   return (
     <article className={handles.searchHistoryWrapper}>
-      <p>Recently</p>
-      <hr />
-
-      <ol>
+      <h4 className={handles.searchHistoryTitle}>Recent</h4>
+      <ol className={handles.searchHistoryOl}>
         {historyItems.map((item, i) => (
-          <li key={item.value}>
+          <li key={item.value} className={handles.searchHistoryLi}>
             <Link
               className={handles.searchHistoryLink}
               page="store.search"
