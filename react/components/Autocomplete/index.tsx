@@ -9,8 +9,8 @@ import { withPixel } from 'vtex.pixel-manager/PixelContext'
 
 import BiggyClient from '../../utils/biggy-client'
 import TileList from './components/TileList/TileList'
-import { Item } from './components/ItemList/types'
-import { ItemList } from './components/ItemList/ItemList'
+import { Item } from './components/SuggestionSection/types'
+import SuggestionSection from '../SuggestionSection'
 import { withRuntime } from '../../utils/withRuntime'
 import { decodeUrlString, encodeUrlString } from '../../utils/string-utils'
 import {
@@ -228,30 +228,6 @@ class AutoComplete extends React.Component<
     })
   }
 
-  renderSuggestions() {
-    const hasSuggestion =
-      !!this.state.suggestionItems && this.state.suggestionItems.length > 0
-
-    const titleMessage = hasSuggestion ? 'Suggestions' : 'No Suggestions'
-
-    return (
-      <ItemList
-        title={titleMessage}
-        items={this.state.suggestionItems || []}
-        showTitle={!hasSuggestion}
-        onItemClick={(value, position) => {
-          handleItemClick(
-            this.props.push,
-            this.props.runtime.page,
-            EventType.SearchSuggestionClick
-          )(value, position)
-          this.closeModal()
-        }}
-        closeModal={() => this.closeModal()}
-      />
-    )
-  }
-
   contentWhenQueryIsNotEmpty() {
     const { products, totalProducts, isProductsLoading } = this.state
     const { push, runtime, inputValue } = this.props
@@ -259,7 +235,18 @@ class AutoComplete extends React.Component<
 
     return (
       <>
-        {this.renderSuggestions()}
+        <SuggestionSection
+          items={this.state.suggestionItems || []}
+          onItemClick={(value: string, position: number) => {
+            handleItemClick(
+              this.props.push,
+              this.props.runtime.page,
+              EventType.SearchSuggestionClick
+            )(value, position)
+            this.closeModal()
+          }}
+          closeModal={() => this.closeModal()}
+        />
         <TileList
           title={`Products for ${inputValue}`}
           products={products || []}

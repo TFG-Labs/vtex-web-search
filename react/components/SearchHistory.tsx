@@ -28,7 +28,9 @@ const SearchHistory: FC<SearchHistoryProps> = props => {
                 term: item.value,
               }}
               query={`map=ft&_q=${item.value}`}
-              onClick={() => props.onItemClick(item.value, i)}
+              onClick={() => {
+                props.onItemClick(item.value, i)
+              }}
             >
               <span>{item.label}</span>
             </Link>
