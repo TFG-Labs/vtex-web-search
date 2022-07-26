@@ -3,10 +3,10 @@ import { Link } from 'vtex.render-runtime'
 interface SeeMoreButtonProps {
   term: string
   onSeeAllClick: (term: string) => void
-  totalProducts: number
 }
+
 const SeeMoreButton = (props: SeeMoreButtonProps) => {
-  const { term, totalProducts } = props
+  const { term } = props
 
   return (
     <Link
@@ -17,7 +17,7 @@ const SeeMoreButton = (props: SeeMoreButtonProps) => {
       page="store.search"
       onClick={() => props.onSeeAllClick(term)}
     >
-      See all {totalProducts} whoop whoop
+      See all
     </Link>
   )
 }

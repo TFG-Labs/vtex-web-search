@@ -35,7 +35,6 @@ interface AutoCompleteProps {
 interface AutoCompleteState {
   suggestionItems: Item[]
   products: any[]
-  totalProducts: number
   dynamicTerm: string
   isProductsLoading: boolean
 }
@@ -51,8 +50,6 @@ class AutoComplete extends React.Component<
   public readonly state: AutoCompleteState = {
     products: [],
     suggestionItems: [],
-    totalProducts: 0,
-
     dynamicTerm: '',
     isProductsLoading: false,
   }
@@ -129,7 +126,6 @@ class AutoComplete extends React.Component<
     if (!term) {
       this.setState({
         products: [],
-        totalProducts: 0,
       })
 
       return
@@ -157,16 +153,23 @@ class AutoComplete extends React.Component<
 
     this.setState({
       products,
-      totalProducts: productSuggestions.count,
     })
   }
 
   contentWhenQueryIsNotEmpty() {
-    const { products, totalProducts, isProductsLoading } = this.state
+    const { products, isProductsLoading } = this.state
     const { push, runtime, inputValue } = this.props
 
     return (
       <>
+        <SeeMoreButton
+          term={encodeUrlString(inputValue) || ''}
+          onSeeAllClick={term => {
+            handleSeeAllClick(push, runtime.page)(term)
+            this.closeModal()
+          }}
+        />
+
         <SuggestionSection
           items={this.state.suggestionItems || []}
           onItemClick={(value: string, position: number) => {
@@ -188,17 +191,6 @@ class AutoComplete extends React.Component<
             this.closeModal()
           }}
         />
-
-        {totalProducts > 0 && (
-          <SeeMoreButton
-            term={encodeUrlString(inputValue) || ''}
-            onSeeAllClick={term => {
-              handleSeeAllClick(push, runtime.page)(term)
-              this.closeModal()
-            }}
-            totalProducts={totalProducts || 0}
-          />
-        )}
       </>
     )
   }
