@@ -45,10 +45,6 @@ class AutoComplete extends React.Component<
     this.client = new BiggyClient(this.props.client)
   }
 
-  shouldUpdate(prevProps: AutoCompleteProps) {
-    return prevProps.inputValue !== this.props.inputValue
-  }
-
   closeModal() {
     if (this.props.closeMenu) {
       this.props.closeMenu()
@@ -56,9 +52,7 @@ class AutoComplete extends React.Component<
   }
 
   componentDidUpdate(prevProps: AutoCompleteProps) {
-    if (!this.shouldUpdate(prevProps)) {
-      return
-    }
+    if (prevProps.inputValue === this.props.inputValue) return
 
     addTermToHistory()
 
