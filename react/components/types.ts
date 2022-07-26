@@ -11,4 +11,5 @@ export interface AutoCompleteProps {
   inputValue: string
   push: (data: any) => void
   closeMenu: () => void
+  isOpen: boolean
 }

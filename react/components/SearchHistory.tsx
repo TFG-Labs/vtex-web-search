@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { useCssHandles } from 'vtex.css-handles'
 import { Link } from 'vtex.render-runtime'
+import HorizontalRule from './HorizontalRule'
 import { searchHistory, transformSearchHistory } from './utils'
 
 interface SearchHistoryProps {
@@ -23,6 +24,7 @@ const SearchHistory: FC<SearchHistoryProps> = props => {
   return (
     <article className={handles.searchHistoryWrapper}>
       <h4 className={handles.searchHistoryTitle}>Recent</h4>
+      <HorizontalRule />
       <ol className={handles.searchHistoryOl}>
         {historyItems.map((item, i) => (
           <li key={item.value} className={handles.searchHistoryLi}>

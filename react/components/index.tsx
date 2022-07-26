@@ -142,12 +142,17 @@ class AutoComplete extends React.Component<
   }
 
   render() {
-    const query = this.props.inputValue.trim()
+    const { isOpen, inputValue } = this.props
+    const query = inputValue.trim()
     const hasQuery = query && query !== ''
 
     return (
       //this is a class component and we are able to use cssHandles and need to target this
-      <section className="thefoschini-search-2-x-topNavSearchResult">
+      <section
+        className={`thefoschini-search-2-x-topNavSearchResult${
+          isOpen ? '' : '--hidden'
+        }`}
+      >
         <ProductListProvider listName="autocomplete-result-list">
           {hasQuery ? (
             this.contentWhenQueryIsNotEmpty()
