@@ -8,7 +8,7 @@ import { withDevice } from 'vtex.device-detector'
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
 import BiggyClient from '../utils/biggy-client'
 import ProductResults from './ProductResults'
-import SuggestionSection from './SuggestionSection'
+// import SuggestionSection from './SuggestionSection'
 import { withRuntime } from '../utils/withRuntime'
 
 import {
@@ -19,7 +19,10 @@ import {
 } from '../utils/pixel'
 import SeeMoreButton from './Autocomplete/components/SeeMoreButton'
 import SearchHistory from './SearchHistory'
-import { addTermToHistory, transformSearchSuggestions } from './utils'
+import {
+  addTermToHistory,
+  // transformSearchSuggestions
+} from './utils'
 import { AutoCompleteProps, AutoCompleteState } from './types'
 
 const MAX_SUGGESTED_PRODUCTS = 5
@@ -35,7 +38,7 @@ class AutoComplete extends React.Component<
   public readonly state: AutoCompleteState = {
     products: [],
     suggestionItems: [],
-    isProductsLoading: false,
+    loading: false,
   }
 
   constructor(props: WithApolloClient<AutoCompleteProps>) {
@@ -62,49 +65,45 @@ class AutoComplete extends React.Component<
         products: [],
       })
     } else {
-      this.updateProducts(inputValue)
+      this.updateSuggestionsAndProductResult()
     }
   }
 
-  async updateSuggestions() {
-    const result = await this.client.suggestionSearches(this.props.inputValue)
-    const { searches } = result.data.autocompleteSearchSuggestions
+  async updateSuggestionsAndProductResult() {
+    const { inputValue } = this.props
 
-    const query = this.props.inputValue.toLocaleLowerCase()
+    this.setState({ loading: true })
 
-    const suggestionItems = transformSearchSuggestions(searches, query)
+    const res = await Promise.all([
+      // will remove once this is investigated https://tfginfotec.atlassian.net/browse/TLF-1078
+      // this.client.suggestionSearches(inputValue),
+      this.client.suggestionProducts(inputValue, MAX_SUGGESTED_PRODUCTS),
+    ])
 
-    this.setState({ suggestionItems })
-  }
-
-  async updateProducts(inputValue: string) {
-    this.setState({
-      isProductsLoading: true,
-    })
-
-    const result = await this.client.suggestionProducts(
-      inputValue,
-      MAX_SUGGESTED_PRODUCTS
-    )
-
-    this.setState({
-      isProductsLoading: false,
-    })
-
-    const { productSuggestions } = result.data
-
-    const products = productSuggestions.products.slice(
-      0,
-      MAX_SUGGESTED_PRODUCTS
-    )
+    const [
+      // will remove once this is investigated https://tfginfotec.atlassian.net/browse/TLF-1078
+      // searchSuggestionResult,
+      productSuggestionResult,
+    ] = res
+    const { products } = productSuggestionResult.data.productSuggestions
+    // will remove once this is investigated https://tfginfotec.atlassian.net/browse/TLF-1078 ]
+    // const {
+    //   searches,
+    // } = searchSuggestionResult.data.autocompleteSearchSuggestions
 
     this.setState({
-      products,
+      loading: false,
+      // will remove once this is investigated https://tfginfotec.atlassian.net/browse/TLF-1078
+      // suggestionItems: transformSearchSuggestions(
+      //   searches,
+      //   inputValue.toLocaleLowerCase()
+      // ),
+      products: products.slice(0, MAX_SUGGESTED_PRODUCTS),
     })
   }
 
   contentWhenQueryIsNotEmpty() {
-    const { products, isProductsLoading } = this.state
+    const { products } = this.state
     const { push, runtime, inputValue } = this.props
 
     return (
@@ -117,7 +116,8 @@ class AutoComplete extends React.Component<
           }}
         />
 
-        <SuggestionSection
+        {/* will remove once this is investigated https://tfginfotec.atlassian.net/browse/TLF-1078 */}
+        {/* <SuggestionSection
           items={this.state.suggestionItems || []}
           onItemClick={(value: string, position: number) => {
             handleItemClick(
@@ -128,11 +128,10 @@ class AutoComplete extends React.Component<
             this.closeModal()
           }}
           closeModal={() => this.closeModal()}
-        />
+        /> */}
         <ProductResults
           inputValue={inputValue}
           products={products || []}
-          isLoading={isProductsLoading}
           onProductClick={(id, position) => {
             handleProductClick(push, runtime.page)(id, position)
             this.closeModal()
@@ -147,7 +146,8 @@ class AutoComplete extends React.Component<
     const hasQuery = query && query !== ''
 
     return (
-      <section style={{ width: '500px', backgroundColor: 'white' }}>
+      //this is a class component and we are able to use cssHandles and need to target this
+      <section className="thefoschini-search-2-x-topNavSearchResult">
         <ProductListProvider listName="autocomplete-result-list">
           {hasQuery ? (
             this.contentWhenQueryIsNotEmpty()
