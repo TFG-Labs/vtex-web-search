@@ -62,9 +62,8 @@ class AutoComplete extends React.Component<
         products: [],
       })
     } else {
-      this.updateSuggestions().then(() => {
-        return this.updateProducts(inputValue)
-      })
+      this.updateSuggestions()
+      this.updateProducts(inputValue)
     }
   }
 
