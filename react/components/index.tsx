@@ -6,7 +6,6 @@ import { withApollo, WithApolloClient } from 'react-apollo'
 import { ProductListContext } from 'vtex.product-list-context'
 import { withDevice } from 'vtex.device-detector'
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
-
 import BiggyClient from '../utils/biggy-client'
 import ProductResults from './ProductResults'
 import { Item } from './Autocomplete/components/SuggestionSection/types'
