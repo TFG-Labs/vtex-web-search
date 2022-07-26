@@ -8,7 +8,6 @@ import { withDevice } from 'vtex.device-detector'
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
 import BiggyClient from '../utils/biggy-client'
 import ProductResults from './ProductResults'
-import { Item } from './Autocomplete/components/SuggestionSection/types'
 import SuggestionSection from './SuggestionSection'
 import { withRuntime } from '../utils/withRuntime'
 
@@ -21,22 +20,9 @@ import {
 import SeeMoreButton from './Autocomplete/components/SeeMoreButton'
 import SearchHistory from './SearchHistory'
 import { prependSearchHistory, transformSearchSuggestions } from './utils'
+import { AutoCompleteProps, AutoCompleteState } from './types'
 
 const MAX_SUGGESTED_PRODUCTS = 5
-
-interface AutoCompleteProps {
-  runtime: { page: string }
-  inputValue: string
-  push: (data: any) => void
-  closeMenu: () => void
-}
-
-interface AutoCompleteState {
-  suggestionItems: Item[]
-  products: any[]
-  dynamicTerm: string
-  isProductsLoading: boolean
-}
 
 const { ProductListProvider } = ProductListContext
 

@@ -27,8 +27,8 @@ const ProductResults: FC<ProductResultsProps> = ({
   inputValue,
 }) => {
   const { handles } = useCssHandles(CSS_HANDLES)
+
   if (!products.length && !isLoading) return null
-  if (isLoading) return <div>loader</div>
 
   const productSummaryItems: Product[] = products.map(product =>
     ProductSummary.mapCatalogProductToProductSummary(product)
