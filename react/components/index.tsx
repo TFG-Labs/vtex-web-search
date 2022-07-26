@@ -35,7 +35,6 @@ class AutoComplete extends React.Component<
   public readonly state: AutoCompleteState = {
     products: [],
     suggestionItems: [],
-    dynamicTerm: '',
     isProductsLoading: false,
   }
 
@@ -57,10 +56,6 @@ class AutoComplete extends React.Component<
 
     const { inputValue } = this.props
 
-    this.setState({
-      dynamicTerm: inputValue,
-    })
-
     if (inputValue === null || inputValue === '') {
       this.setState({
         suggestionItems: [],
@@ -68,7 +63,7 @@ class AutoComplete extends React.Component<
       })
     } else {
       this.updateSuggestions().then(() => {
-        return this.updateProducts()
+        return this.updateProducts(inputValue)
       })
     }
   }
@@ -84,23 +79,13 @@ class AutoComplete extends React.Component<
     this.setState({ suggestionItems })
   }
 
-  async updateProducts() {
-    const term = this.state.dynamicTerm
-
-    if (!term) {
-      this.setState({
-        products: [],
-      })
-
-      return
-    }
-
+  async updateProducts(inputValue: string) {
     this.setState({
       isProductsLoading: true,
     })
 
     const result = await this.client.suggestionProducts(
-      term,
+      inputValue,
       MAX_SUGGESTED_PRODUCTS
     )
 

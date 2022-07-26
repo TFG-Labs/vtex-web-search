@@ -3,7 +3,6 @@ import { Item } from './Autocomplete/components/SuggestionSection/types'
 export interface AutoCompleteState {
   suggestionItems: Item[]
   products: any[]
-  dynamicTerm: string
   isProductsLoading: boolean
 }
 
