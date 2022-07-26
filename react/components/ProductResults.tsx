@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import ProductSummary from 'vtex.product-summary/ProductSummaryCustom'
 import { Link } from 'vtex.render-runtime'
+import { useCssHandles } from 'vtex.css-handles'
 
 interface ProductResultsProps {
   products: any[]
@@ -8,11 +9,19 @@ interface ProductResultsProps {
   onProductClick: (product: string, position: number) => void
 }
 
+const CSS_HANDLES = [
+  'productResultsWrapper',
+  'productResultImage',
+  'productResultName',
+  'productResultLink',
+] as const
+
 const ProductResults: FC<ProductResultsProps> = ({
   products,
   isLoading,
   onProductClick,
 }) => {
+  const { handles } = useCssHandles(CSS_HANDLES)
   if (!products.length && !isLoading) return null
   if (isLoading) return <div>loader</div>
 
@@ -22,30 +31,27 @@ const ProductResults: FC<ProductResultsProps> = ({
 
   return (
     <section>
-      <ul>
-        {productSummaryItems.map((product, index: number) => (
-          <Link
-            key={index}
-            params={{
-              slug: product?.linkText,
-              id: product?.productId,
-            }}
-            page="store.product"
-            className="no-underline"
-            onClick={() => {
-              onProductClick(product.productId, index)
-            }}
-          >
-            <div>
-              <img
-                src={product?.sku?.image?.imageUrl}
-                alt={product?.sku?.image?.imageLabel ?? ''}
-              />
-              {product.productName}
-            </div>
-          </Link>
-        ))}
-      </ul>
+      {productSummaryItems.map((product, index) => (
+        <Link
+          key={index}
+          params={{
+            slug: product?.linkText,
+            id: product?.productId,
+          }}
+          page="store.product"
+          className={handles.productResultLink}
+          onClick={() => {
+            onProductClick(product.productId, index)
+          }}
+        >
+          <img
+            className={handles.productResultImage}
+            src={product?.sku?.image?.imageUrl}
+            alt={product?.sku?.image?.imageLabel ?? ''}
+          />
+          <p className={handles.productResultName}>{product.productName}</p>
+        </Link>
+      ))}
     </section>
   )
 }
