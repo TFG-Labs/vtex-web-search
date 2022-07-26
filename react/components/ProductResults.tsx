@@ -7,7 +7,7 @@ import HorizontalRule from './HorizontalRule'
 
 interface ProductResultsProps {
   products: any[]
-  isLoading: boolean
+
   onProductClick: (product: string, position: number) => void
   inputValue: string
 }
@@ -22,13 +22,12 @@ const CSS_HANDLES = [
 
 const ProductResults: FC<ProductResultsProps> = ({
   products,
-  isLoading,
   onProductClick,
   inputValue,
 }) => {
   const { handles } = useCssHandles(CSS_HANDLES)
 
-  if (!products.length && !isLoading) return null
+  if (!products.length) return null
 
   const productSummaryItems: Product[] = products.map(product =>
     ProductSummary.mapCatalogProductToProductSummary(product)
