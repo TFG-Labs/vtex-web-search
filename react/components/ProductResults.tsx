@@ -3,6 +3,7 @@ import ProductSummary from 'vtex.product-summary/ProductSummaryCustom'
 import { Link } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import { highlightTerm } from './utils'
+import HorizontalRule from './HorizontalRule'
 
 interface ProductResultsProps {
   products: any[]
@@ -35,6 +36,7 @@ const ProductResults: FC<ProductResultsProps> = ({
 
   return (
     <section>
+      <HorizontalRule />
       {productSummaryItems.map((product, index) => (
         <Link
           key={index}

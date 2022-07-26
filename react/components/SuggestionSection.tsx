@@ -4,6 +4,7 @@ import { Link } from 'vtex.render-runtime'
 
 import { Item } from './Autocomplete/components/SuggestionSection/types'
 import Attribute from './Autocomplete/components/SuggestionSection/Attribute'
+import HorizontalRule from './HorizontalRule'
 
 interface SuggestionSectionProps {
   items: Item[]
@@ -16,8 +17,7 @@ const SuggestionSection: FC<SuggestionSectionProps> = props => {
 
   return (
     <article>
-      <p>Suggestionss</p>
-      <hr />
+      {items.length > 0 && <HorizontalRule />}
       <ol>
         {items.map((item, index) => {
           return (
