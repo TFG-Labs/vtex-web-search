@@ -19,7 +19,7 @@ import {
 } from '../utils/pixel'
 import SeeMoreButton from './Autocomplete/components/SeeMoreButton'
 import SearchHistory from './SearchHistory'
-import { prependSearchHistory, transformSearchSuggestions } from './utils'
+import { addTermToHistory, transformSearchSuggestions } from './utils'
 import { AutoCompleteProps, AutoCompleteState } from './types'
 
 const MAX_SUGGESTED_PRODUCTS = 5
@@ -49,20 +49,6 @@ class AutoComplete extends React.Component<
     return prevProps.inputValue !== this.props.inputValue
   }
 
-  addTermToHistory() {
-    const path = window.location.href.split('_q=')
-
-    if (path[1]) {
-      const term = path[1].split('&')[0]
-
-      try {
-        prependSearchHistory(decodeURI(term))
-      } catch {
-        prependSearchHistory(term)
-      }
-    }
-  }
-
   closeModal() {
     if (this.props.closeMenu) {
       this.props.closeMenu()
@@ -74,7 +60,7 @@ class AutoComplete extends React.Component<
       return
     }
 
-    this.addTermToHistory()
+    addTermToHistory()
 
     const { inputValue } = this.props
 

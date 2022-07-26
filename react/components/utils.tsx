@@ -100,7 +100,7 @@ export const searchHistory = () => {
 /**
  * Add terms to the search history
  */
-export const prependSearchHistory = (term: string, limit = 5) => {
+const prependSearchHistory = (term: string, limit = 5) => {
   if (term == null || term.trim() === '') {
     return
   }
@@ -113,4 +113,21 @@ export const prependSearchHistory = (term: string, limit = 5) => {
   }
 
   setCookie(HISTORY_KEY, history.join(','))
+}
+
+/**
+ * Add the search to search history cookie
+ */
+export const addTermToHistory = () => {
+  const path = window.location.href.split('_q=')
+
+  if (path[1]) {
+    const term = path[1].split('&')[0]
+
+    try {
+      prependSearchHistory(decodeURI(term))
+    } catch {
+      prependSearchHistory(term)
+    }
+  }
 }
