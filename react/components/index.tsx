@@ -12,7 +12,7 @@ import ProductResults from './ProductResults'
 import { Item } from './Autocomplete/components/SuggestionSection/types'
 import SuggestionSection from './SuggestionSection'
 import { withRuntime } from '../utils/withRuntime'
-import { encodeUrlString } from '../utils/string-utils'
+
 import {
   EventType,
   handleItemClick,
@@ -163,7 +163,7 @@ class AutoComplete extends React.Component<
     return (
       <>
         <SeeMoreButton
-          term={encodeUrlString(inputValue) || ''}
+          inputValue={inputValue}
           onSeeAllClick={term => {
             handleSeeAllClick(push, runtime.page)(term)
             this.closeModal()
