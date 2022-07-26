@@ -46,9 +46,8 @@ class AutoComplete extends React.Component<
   }
 
   closeModal() {
-    if (this.props.closeMenu) {
-      this.props.closeMenu()
-    }
+    const { closeMenu } = this.props
+    if (closeMenu) closeMenu()
   }
 
   componentDidUpdate(prevProps: AutoCompleteProps) {
