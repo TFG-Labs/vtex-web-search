@@ -180,6 +180,7 @@ class AutoComplete extends React.Component<
           closeModal={() => this.closeModal()}
         />
         <ProductResults
+          inputValue={inputValue}
           products={products || []}
           isLoading={isProductsLoading}
           onProductClick={(id, position) => {

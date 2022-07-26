@@ -6,9 +6,15 @@ import { getCookie, setCookie } from '../utils/dom-utils'
 
 /**
  * Given a query and a label: wrap the term in a bold span for styling
+ *
+ * opitonalClass: swap out the class for the span to be used
  */
 
-const highlightTerm = (label: string, query: string) => {
+export const highlightTerm = (
+  label: string,
+  query: string,
+  optionalClass?: string
+) => {
   const splittedLabel = label.split(query)
 
   return (
@@ -18,7 +24,7 @@ const highlightTerm = (label: string, query: string) => {
           <>
             {str}
             {index !== splittedLabel.length - 1 ? (
-              <span className="b">{query}</span>
+              <span className={optionalClass ?? ''}>{query}</span>
             ) : null}
           </>
         )

@@ -2,11 +2,13 @@ import React, { FC } from 'react'
 import ProductSummary from 'vtex.product-summary/ProductSummaryCustom'
 import { Link } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
+import { highlightTerm } from './utils'
 
 interface ProductResultsProps {
   products: any[]
   isLoading: boolean
   onProductClick: (product: string, position: number) => void
+  inputValue: string
 }
 
 const CSS_HANDLES = [
@@ -14,12 +16,14 @@ const CSS_HANDLES = [
   'productResultImage',
   'productResultName',
   'productResultLink',
+  'productResultHighlightedTerm',
 ] as const
 
 const ProductResults: FC<ProductResultsProps> = ({
   products,
   isLoading,
   onProductClick,
+  inputValue,
 }) => {
   const { handles } = useCssHandles(CSS_HANDLES)
   if (!products.length && !isLoading) return null
@@ -49,7 +53,13 @@ const ProductResults: FC<ProductResultsProps> = ({
             src={product?.sku?.image?.imageUrl}
             alt={product?.sku?.image?.imageLabel ?? ''}
           />
-          <p className={handles.productResultName}>{product.productName}</p>
+          <p className={handles.productResultName}>
+            {highlightTerm(
+              product.productName,
+              inputValue,
+              handles.productResultHighlightedTerm
+            )}
+          </p>
         </Link>
       ))}
     </section>
