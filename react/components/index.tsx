@@ -21,6 +21,7 @@ import {
 import SeeMoreButton from './Autocomplete/components/SeeMoreButton'
 import SearchHistory from './SearchHistory'
 import { prependSearchHistory, transformSearchSuggestions } from './utils'
+import HorizontalRule from './HorizontalRule'
 
 const MAX_SUGGESTED_PRODUCTS = 5
 
@@ -168,7 +169,7 @@ class AutoComplete extends React.Component<
             this.closeModal()
           }}
         />
-
+        <HorizontalRule />
         <SuggestionSection
           items={this.state.suggestionItems || []}
           onItemClick={(value: string, position: number) => {
