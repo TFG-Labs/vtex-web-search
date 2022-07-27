@@ -21,6 +21,8 @@ const SearchHistory: FC<SearchHistoryProps> = props => {
   const history = searchHistory()
   const historyItems = transformSearchHistory(history)
 
+  if (!historyItems.length) return null
+
   return (
     <article className={handles.searchHistoryWrapper}>
       <h4 className={handles.searchHistoryTitle}>Recent</h4>
