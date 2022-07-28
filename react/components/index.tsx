@@ -8,7 +8,7 @@ import { withDevice } from 'vtex.device-detector'
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
 import BiggyClient from '../utils/biggy-client'
 import ProductResults from './ProductResults'
-// import SuggestionSection from './SuggestionSection'
+import SuggestionSection from './SuggestionSection'
 import { withRuntime } from '../utils/withRuntime'
 
 import {
@@ -19,10 +19,7 @@ import {
 } from '../utils/pixel'
 import SeeMoreButton from './Autocomplete/components/SeeMoreButton'
 import SearchHistory from './SearchHistory'
-import {
-  addTermToHistory,
-  // transformSearchSuggestions
-} from './utils'
+import { addTermToHistory, transformSearchSuggestions } from './utils'
 import { AutoCompleteProps, AutoCompleteState } from './types'
 
 const MAX_SUGGESTED_PRODUCTS = 5
@@ -75,29 +72,23 @@ class AutoComplete extends React.Component<
     this.setState({ loading: true })
 
     const res = await Promise.all([
-      // will remove once this is investigated https://tfginfotec.atlassian.net/browse/TLF-1078
-      // this.client.suggestionSearches(inputValue),
+      this.client.suggestionSearches(inputValue),
       this.client.suggestionProducts(inputValue, MAX_SUGGESTED_PRODUCTS),
     ])
 
-    const [
-      // will remove once this is investigated https://tfginfotec.atlassian.net/browse/TLF-1078
-      // searchSuggestionResult,
-      productSuggestionResult,
-    ] = res
+    const [searchSuggestionResult, productSuggestionResult] = res
     const { products } = productSuggestionResult.data.productSuggestions
-    // will remove once this is investigated https://tfginfotec.atlassian.net/browse/TLF-1078 ]
-    // const {
-    //   searches,
-    // } = searchSuggestionResult.data.autocompleteSearchSuggestions
+
+    const {
+      searches,
+    } = searchSuggestionResult.data.autocompleteSearchSuggestions
 
     this.setState({
       loading: false,
-      // will remove once this is investigated https://tfginfotec.atlassian.net/browse/TLF-1078
-      // suggestionItems: transformSearchSuggestions(
-      //   searches,
-      //   inputValue.toLocaleLowerCase()
-      // ),
+      suggestionItems: transformSearchSuggestions(
+        searches,
+        inputValue.toLocaleLowerCase()
+      ),
       products: products.slice(0, MAX_SUGGESTED_PRODUCTS),
     })
   }
@@ -115,9 +106,7 @@ class AutoComplete extends React.Component<
             this.closeModal()
           }}
         />
-
-        {/* will remove once this is investigated https://tfginfotec.atlassian.net/browse/TLF-1078 */}
-        {/* <SuggestionSection
+        <SuggestionSection
           items={this.state.suggestionItems || []}
           onItemClick={(value: string, position: number) => {
             handleItemClick(
@@ -128,7 +117,7 @@ class AutoComplete extends React.Component<
             this.closeModal()
           }}
           closeModal={() => this.closeModal()}
-        /> */}
+        />
         <ProductResults
           inputValue={inputValue}
           products={products || []}
