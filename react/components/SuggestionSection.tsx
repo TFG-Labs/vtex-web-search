@@ -15,15 +15,11 @@ interface SuggestionSectionProps {
 const SuggestionSection: FC<SuggestionSectionProps> = props => {
   const { items } = props
 
-  const filteredItems = items.filter(
-    ({ attributes }) => attributes && attributes.length > 0
-  )
-
   return (
     <article>
-      {filteredItems.length > 0 && <HorizontalRule />}
+      {items.length > 0 && <HorizontalRule />}
       <ol>
-        {filteredItems.map((item, index) => {
+        {items.map((item, index) => {
           return (
             <li key={item.value}>
               <Link
@@ -36,7 +32,11 @@ const SuggestionSection: FC<SuggestionSectionProps> = props => {
               >
                 <span>{item.label}</span>
               </Link>
-              <Attribute item={item} closeModal={props.closeModal} />
+              <Attribute
+                key={item.value}
+                item={item}
+                closeModal={props.closeModal}
+              />
             </li>
           )
         })}

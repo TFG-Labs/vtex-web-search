@@ -8,21 +8,28 @@ interface IAttributeProps {
   closeModal: () => void
 }
 
-const Attribute = (props: IAttributeProps) =>
-  props.item?.attributes ? (
+const Attribute = (props: IAttributeProps) => {
+  const { item } = props
+
+  if (!item?.attributes) return null
+
+  return (
     <ul>
-      {props.item.attributes.map((attribute, index) => (
+      {item.attributes.map((attribute, index) => (
         <li key={index}>
           <Link
             to={`/${props.item.value}/${attribute.value}`}
             query={`map=ft,${attribute.key}`}
             onClick={() => props.closeModal()}
           >
-            {attribute.label}
+            {' '}
+            <span>{attribute.label}</span> <span> &gt;</span>
+            <span>{item.label}</span>
           </Link>
         </li>
       ))}
     </ul>
-  ) : null
+  )
+}
 
 export default Attribute
