@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { Link } from 'vtex.render-runtime'
 
 import { Item } from './Autocomplete/components/SuggestionSection/types'
-import Attribute from './Autocomplete/components/SuggestionSection/Attribute'
+import Attribute from './Attribute'
 import HorizontalRule from './HorizontalRule'
 
 interface SuggestionSectionProps {
