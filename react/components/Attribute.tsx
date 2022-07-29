@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'vtex.render-runtime'
 
-import { Item } from './Autocomplete/components/SuggestionSection/types'
+import { Item } from './types'
 
 interface IAttributeProps {
   item: Item

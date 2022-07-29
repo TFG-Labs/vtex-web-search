@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'vtex.render-runtime'
-import { encodeUrlString } from '../../../utils/string-utils'
+import { encodeUrlString } from '../utils/string-utils'
 import { useCssHandles } from 'vtex.css-handles'
 interface SeeMoreButtonProps {
   onSeeAllClick: (term: string) => void

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import React, { FC } from 'react'
 import { Link } from 'vtex.render-runtime'
-
-import { Item } from './Autocomplete/components/SuggestionSection/types'
+import { useCssHandles } from 'vtex.css-handles'
+import { Item } from './types'
 import Attribute from './Attribute'
 import HorizontalRule from './HorizontalRule'
 
@@ -12,11 +12,20 @@ interface SuggestionSectionProps {
   closeModal: () => void
 }
 
+const CSS_HANDLES = [
+  'suggestionSectionWrapper',
+  'suggestionSectionOl',
+  'suggestionSectionLi',
+  'suggestionSectionLabel',
+] as const
+
 const SuggestionSection: FC<SuggestionSectionProps> = props => {
+  const { handles } = useCssHandles(CSS_HANDLES)
+
   const { items } = props
 
   return (
-    <article>
+    <article className={handles.suggestionSectionWrapper}>
       {items.length > 0 && <HorizontalRule />}
       <ol>
         {items.map((item, index) => {

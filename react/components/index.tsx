@@ -17,7 +17,7 @@ import {
   handleProductClick,
   handleSeeAllClick,
 } from '../utils/pixel'
-import SeeMoreButton from './Autocomplete/components/SeeMoreButton'
+import SeeMoreButton from './SeeMoreButton'
 import SearchHistory from './SearchHistory'
 import { addTermToHistory, transformSearchSuggestions } from './utils'
 import { AutoCompleteProps, AutoCompleteState } from './types'
