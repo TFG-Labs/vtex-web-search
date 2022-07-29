@@ -49,27 +49,29 @@ const SuggestionLink = (props: SuggestionLinkProps) => {
 }
 
 const AtrributeLinks = (props: AtrributeLinkProps) => {
+  const { handles } = useCssHandles(CSS_HANDLES)
   const { item } = props
 
-  if (!item?.attributes) return null
+  if (!item?.attributes || item?.attributes.length === 0) return null
 
-  return (
-    <ul>
-      {item.attributes.map((attribute, index) => (
-        <li key={index}>
-          <Link
-            to={`/${props.item.value}/${attribute.value}`}
-            query={`map=ft,${attribute.key}`}
-            onClick={() => props.closeModal()}
-          >
-            {' '}
-            <span>{attribute.label}</span> <span> &gt;</span>
-            <span>{item.label}</span>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  )
+  const itemsElements = item.attributes.map((attribute, index) => {
+    return (
+      <li key={index}>
+        <Link
+          className={handles.suggestionSectionLink}
+          to={`/${props.item.value}/${attribute.value}`}
+          query={`map=ft,${attribute.key}`}
+          onClick={() => props.closeModal()}
+        >
+          {' '}
+          <span>{attribute.label}</span> <span> &gt;</span>
+          <span>{item.label}</span>
+        </Link>
+      </li>
+    )
+  })
+
+  return <>{itemsElements}</>
 }
 
 const SuggestionSection: FC<SuggestionSectionProps> = props => {
@@ -82,26 +84,19 @@ const SuggestionSection: FC<SuggestionSectionProps> = props => {
       {items.length > 0 && <HorizontalRule />}
       <ol className={handles.suggestionSectionOl}>
         {items.map((item, index) => {
-          const showAttributeLink = item.attributes !== undefined
+          // const showAttributeLink = item.attributes !== undefined
 
           return (
-            <li key={item.value} className={handles.suggestionSectionLi}>
-              {!showAttributeLink && (
+            <React.Fragment key={item.value}>
+              <li className={handles.suggestionSectionLi}>
                 <SuggestionLink
                   item={item}
                   onItemClick={props.onItemClick}
                   position={index}
                 />
-              )}
-
-              {showAttributeLink && (
-                <AtrributeLinks
-                  key={item.value}
-                  item={item}
-                  closeModal={props.closeModal}
-                />
-              )}
-            </li>
+              </li>
+              <AtrributeLinks item={item} closeModal={props.closeModal} />
+            </React.Fragment>
           )
         })}
       </ol>
