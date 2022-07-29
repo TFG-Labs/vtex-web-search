@@ -17,6 +17,7 @@ const CSS_HANDLES = [
   'suggestionSectionOl',
   'suggestionSectionLi',
   'suggestionSectionLabel',
+  'suggestionSectionLink',
 ] as const
 
 const SuggestionSection: FC<SuggestionSectionProps> = props => {
@@ -27,11 +28,12 @@ const SuggestionSection: FC<SuggestionSectionProps> = props => {
   return (
     <article className={handles.suggestionSectionWrapper}>
       {items.length > 0 && <HorizontalRule />}
-      <ol>
+      <ol className={handles.suggestionSectionOl}>
         {items.map((item, index) => {
           return (
-            <li key={item.value}>
+            <li key={item.value} className={handles.suggestionSectionLi}>
               <Link
+                className={handles.suggestionSectionLink}
                 page="store.search"
                 params={{
                   term: item.value,
