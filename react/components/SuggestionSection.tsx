@@ -33,6 +33,8 @@ const SuggestionLink = (props: SuggestionLinkProps) => {
   const { handles } = useCssHandles(CSS_HANDLES)
   const { item, onItemClick, position } = props
 
+  if (item?.attributes && item?.attributes.length > 0) return null
+
   return (
     <Link
       className={handles.suggestionSectionLink}
@@ -64,8 +66,9 @@ const AtrributeLinks = (props: AtrributeLinkProps) => {
           onClick={() => props.closeModal()}
         >
           {' '}
-          <span>{attribute.label}</span> <span> &gt;</span>
-          <span>{item.label}</span>
+          <span>
+            {attribute.label} {item.label}
+          </span>
         </Link>
       </li>
     )
@@ -84,8 +87,6 @@ const SuggestionSection: FC<SuggestionSectionProps> = props => {
       {items.length > 0 && <HorizontalRule />}
       <ol className={handles.suggestionSectionOl}>
         {items.map((item, index) => {
-          // const showAttributeLink = item.attributes !== undefined
-
           return (
             <React.Fragment key={item.value}>
               <li className={handles.suggestionSectionLi}>

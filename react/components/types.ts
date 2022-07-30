@@ -15,7 +15,7 @@ export interface AutoCompleteProps {
 }
 
 export interface Item {
-  label: string | JSX.Element
+  label: string
   value: string
   link: string
   attributes?: AttributeItem[]
