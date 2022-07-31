@@ -31,7 +31,11 @@ const ProductResults: FC<ProductResultsProps> = ({
   if (!products.length) return null
 
   const productSummaryItems: Product[] = products.map(product =>
-    ProductSummary.mapCatalogProductToProductSummary(product)
+    ProductSummary.mapCatalogProductToProductSummary(
+      product,
+      'FIRST_AVAILABLE',
+      80
+    )
   )
 
   return (
