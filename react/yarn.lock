@@ -2235,9 +2235,9 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-"thefoschini.search@https://searchexperiment--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.1+build1659201261/public/@types/thefoschini.search":
+"thefoschini.search@https://searchexperiment--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.1+build1659246610/public/@types/thefoschini.search":
   version "2.13.1"
-  resolved "https://searchexperiment--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.1+build1659201261/public/@types/thefoschini.search#b99346f5396ebfed3bc706dd1c1b4557aa1bc94f"
+  resolved "https://searchexperiment--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.1+build1659246610/public/@types/thefoschini.search#4c1263f1055e344d817eeccf6500f4e0e4c2ba1d"
 
 through@^2.3.6:
   version "2.3.8"
