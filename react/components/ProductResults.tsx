@@ -4,9 +4,10 @@ import { Link } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import { highlightTerm } from './utils'
 import HorizontalRule from './HorizontalRule'
+import { ISearchProduct } from '../models/search-product'
 
 interface ProductResultsProps {
-  products: any[]
+  products: ISearchProduct[]
 
   onProductClick: (product: string, position: number) => void
   inputValue: string

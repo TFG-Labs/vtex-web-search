@@ -1,8 +1,9 @@
+import { ISearchProduct } from '../models/search-product'
 import { Item } from './Autocomplete/components/SuggestionSection/types'
 
 export interface AutoCompleteState {
   suggestionItems: Item[]
-  products: any[]
+  products: ISearchProduct[]
   loading: boolean
 }
 
