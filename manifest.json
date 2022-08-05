@@ -1,6 +1,6 @@
 {
   "name": "search",
-  "vendor": "vtex",
+  "vendor": "thefoschini",
   "version": "2.13.1",
   "title": "Search",
   "description": "Search components and functionality for VTEX IO.",
@@ -10,9 +10,7 @@
   "builders": {
     "store": "0.x",
     "react": "3.x",
-    "styles": "2.x",
-    "docs": "0.x",
-    "messages": "1.x"
+    "styles": "2.x"
   },
   "dependencies": {
     "vtex.native-types": "0.x",
@@ -33,7 +31,7 @@
     "vtex.search-resolver": "1.x",
     "vtex.device-detector": "0.x",
     "vtex.search-page-context": "0.x",
-    "vtex.css-handles": "0.x",
+    "vtex.css-handles": "1.x",
     "vtex.product-price": "1.x",
     "vtex.pixel-manager": "1.x",
     "vtex.tester-hub": "0.x"

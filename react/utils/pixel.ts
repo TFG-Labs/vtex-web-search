@@ -3,7 +3,6 @@ const EVENT_NAME = 'autocomplete'
 export enum EventType {
   ProductClick = 'product_click',
   SearchSuggestionClick = 'search_suggestion_click',
-  TopSearchClick = 'top_search_click',
   HistoryClick = 'history_click',
   Search = 'search',
   SeeAllClick = 'see_all_click',
