@@ -29,7 +29,7 @@ export default class BiggyClient {
     return this.client.query({
       query: suggestionProducts,
       variables: {
-        simulationBehavior: 'skip',
+        simulationBehavior: 'default',
         hideUnavailableItems: true,
         orderBy: 'OrderByScoreDESC',
         fullText: term,
