@@ -22,7 +22,7 @@
     "husky": "^3.0.9",
     "lint-staged": "^9.4.3",
     "prettier": "^2.2.1",
-    "thefoschini.search": "https://tlf1577--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.2+build1667295099/public/@types/thefoschini.search",
+    "thefoschini.search": "https://tlf1577--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.2+build1667295398/public/@types/thefoschini.search",
     "typescript": "3.9.7",
     "vtex.css-handles": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@1.0.0/public/@types/vtex.css-handles",
     "vtex.pixel-manager": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.8.0/public/@types/vtex.pixel-manager",
