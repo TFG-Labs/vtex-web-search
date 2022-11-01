@@ -5,10 +5,11 @@ import React from 'react'
 import { withApollo, WithApolloClient } from 'react-apollo'
 import { ProductListContext } from 'vtex.product-list-context'
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
+import { useRuntime } from 'vtex.render-runtime'
 import BiggyClient from '../utils/biggy-client'
 import ProductResults from './ProductResults'
 import SuggestionSection from './SuggestionSection'
-import { withRuntime } from '../utils/withRuntime'
+
 import { Item } from './types'
 import {
   EventType,
@@ -172,6 +173,12 @@ class AutoComplete extends React.Component<
         </ProductListProvider>
       </section>
     )
+  }
+}
+
+function withRuntime(ComponentWrapped: typeof React.Component) {
+  return function Wrapped(props: any) {
+    return <ComponentWrapped {...props} runtime={useRuntime()} />
   }
 }
 
