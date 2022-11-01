@@ -9,7 +9,7 @@ import BiggyClient from '../utils/biggy-client'
 import ProductResults from './ProductResults'
 import SuggestionSection from './SuggestionSection'
 import { withRuntime } from '../utils/withRuntime'
-
+import { Item } from './types'
 import {
   EventType,
   handleItemClick,
@@ -19,11 +19,24 @@ import {
 import SeeMoreButton from './SeeMoreButton'
 import SearchHistory from './SearchHistory'
 import { addTermToHistory, transformSearchSuggestions } from './utils'
-import { AutoCompleteProps, AutoCompleteState } from './types'
+import { ISearchProduct } from './search-product'
 
 const MAX_SUGGESTED_PRODUCTS = 5
 
 const { ProductListProvider } = ProductListContext
+
+interface AutoCompleteProps {
+  runtime: { page: string }
+  inputValue: string
+  push: (data: any) => void
+  closeMenu: () => void
+  isOpen: boolean
+}
+interface AutoCompleteState {
+  suggestionItems: Item[]
+  products: ISearchProduct[]
+  loading: boolean
+}
 
 class AutoComplete extends React.Component<
   WithApolloClient<AutoCompleteProps>,
