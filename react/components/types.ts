@@ -1,4 +1,4 @@
-import { ISearchProduct } from '../models/search-product'
+import { ISearchProduct } from './search-product'
 
 export interface AutoCompleteState {
   suggestionItems: Item[]
