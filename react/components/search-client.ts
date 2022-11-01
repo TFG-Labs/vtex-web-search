@@ -2,9 +2,9 @@ import ApolloClient, { ApolloQueryResult } from 'apollo-client'
 import suggestionProducts from 'vtex.store-resources/QuerySuggestionProducts'
 import suggestionSearches from 'vtex.store-resources/QueryAutocompleteSearchSuggestions'
 
-import { ISearchProduct } from '../models/search-product'
+import { ISearchProduct } from './search-product'
 
-export default class BiggyClient {
+export default class SearchClient {
   constructor(private client: ApolloClient<any>) {}
 
   public async suggestionSearches(
@@ -77,9 +77,4 @@ interface IElasticProductText {
   value: string
   labelKey: string
   labelValue: string
-}
-
-export interface IExtraInfo {
-  key: string
-  value: string
 }

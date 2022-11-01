@@ -2,7 +2,7 @@
 import React, { FC } from 'react'
 import { Link } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
-import { Item } from './types'
+import { AttributeItem, Item } from './types'
 import HorizontalRule from './HorizontalRule'
 
 interface SuggestionLinkProps {
@@ -56,23 +56,25 @@ const AtrributeLinks = (props: AtrributeLinkProps) => {
 
   if (!item?.attributes || item?.attributes.length === 0) return null
 
-  const itemsElements = item.attributes.map((attribute, index) => {
-    return (
-      <li key={index}>
-        <Link
-          className={handles.suggestionSectionLink}
-          to={`/${props.item.value}/${attribute.value}`}
-          query={`map=ft,${attribute.key}`}
-          onClick={() => props.closeModal()}
-        >
-          {' '}
-          <span>
-            {attribute.label} {item.label}
-          </span>
-        </Link>
-      </li>
-    )
-  })
+  const itemsElements = item.attributes.map(
+    (attribute: AttributeItem, index: number) => {
+      return (
+        <li key={index}>
+          <Link
+            className={handles.suggestionSectionLink}
+            to={`/${props.item.value}/${attribute.value}`}
+            query={`map=ft,${attribute.key}`}
+            onClick={() => props.closeModal()}
+          >
+            {' '}
+            <span>
+              {attribute.label} {item.label}
+            </span>
+          </Link>
+        </li>
+      )
+    }
+  )
 
   return <>{itemsElements}</>
 }

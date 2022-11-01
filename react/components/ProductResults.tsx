@@ -4,7 +4,7 @@ import { Link } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import { highlightTerm } from './utils'
 import HorizontalRule from './HorizontalRule'
-import { ISearchProduct } from '../models/search-product'
+import { ISearchProduct } from './search-product'
 
 interface ProductResultsProps {
   products: ISearchProduct[]

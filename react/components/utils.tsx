@@ -1,8 +1,7 @@
 import React from 'react'
-import { ISuggestionQueryResponseSearch } from '../utils/biggy-client'
+import { ISuggestionQueryResponseSearch } from './search-client'
 import { Item } from './Autocomplete/components/SuggestionSection/types'
-import { decodeUrlString } from '../utils/string-utils'
-import { getCookie, setCookie } from '../utils/dom-utils'
+import { decodeUrlString } from './string-utils'
 
 /**
  * Given a query and a label: wrap the term in a bold span for styling
@@ -86,7 +85,7 @@ export const transformSearchHistory = (searchItems: string[]) => {
   return result
 }
 
-const HISTORY_KEY = 'biggy-search-history'
+const HISTORY_KEY = 'bash-search-history'
 
 /**
  * Get the search history from cookies
@@ -130,4 +129,31 @@ export const addTermToHistory = () => {
       prependSearchHistory(term)
     }
   }
+}
+
+function getCookie(name: string): string | null {
+  const regex = new RegExp(`(^|;)[ ]*${name}=([^;]*)`)
+  const match = regex.exec(document.cookie)
+
+  if (!match) {
+    return null
+  }
+
+  try {
+    return decodeURIComponent(match[2])
+  } catch {
+    return match[2]
+  }
+}
+function setCookie(key: string, value: string, ttl?: number, path = '/') {
+  let expires = ''
+
+  if (ttl && ttl > 0) {
+    const expirationDate = new Date()
+
+    expirationDate.setTime(new Date().getTime() + ttl)
+    expires = `expires=${expirationDate.toUTCString()};`
+  }
+
+  document.cookie = `${key}=${encodeURIComponent(value)};${expires}path=${path}`
 }
