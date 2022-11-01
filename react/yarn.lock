@@ -2235,9 +2235,9 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-"thefoschini.search@https://tlf1577--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.2+build1667282995/public/@types/thefoschini.search":
+"thefoschini.search@https://tlf1577--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.2+build1667283691/public/@types/thefoschini.search":
   version "2.13.2"
-  resolved "https://tlf1577--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.2+build1667282995/public/@types/thefoschini.search#29da7b5598562312c17ed0d869bff7f09e7b4eee"
+  resolved "https://tlf1577--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.2+build1667283691/public/@types/thefoschini.search#13da428421b010a73c536b04ce5f6a5cce197653"
 
 through@^2.3.6:
   version "2.3.8"
@@ -2324,17 +2324,9 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-"vtex.address-form@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.address-form@4.15.6/public/@types/vtex.address-form":
-  version "4.15.6"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.address-form@4.15.6/public/@types/vtex.address-form#84713f42220fae6ccfd7e1f527a341da6b550ab4"
-
 "vtex.css-handles@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@1.0.0/public/@types/vtex.css-handles":
   version "1.0.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@1.0.0/public/@types/vtex.css-handles#336b23ef3a9bcb2b809529ba736783acd405d081"
-
-"vtex.modal@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.modal@0.2.2/public/@types/vtex.modal":
-  version "0.2.2"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.modal@0.2.2/public/@types/vtex.modal#164c756a020e0f960f65b8c9550a7cb080d42edb"
 
 "vtex.native-types@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.native-types@0.8.0/public/@types/vtex.native-types":
   version "0.8.0"
@@ -2352,10 +2344,6 @@ validate-npm-package-license@^3.0.1:
   version "2.80.1"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-summary@2.80.1/public/@types/vtex.product-summary#1210c99a487010c96c987033056e81437dcb289a"
 
-"vtex.react-portal@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.react-portal@0.4.1/public/@types/vtex.react-portal":
-  version "0.4.1"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.react-portal@0.4.1/public/@types/vtex.react-portal#781ce4b53ba576a6365306531d8be0f1ad114769"
-
 "vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.6/public/@types/vtex.render-runtime":
   version "8.132.6"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.6/public/@types/vtex.render-runtime#166e916d8aadbee0cfc4d48a02d3c3e8f2834fc9"
@@ -2371,10 +2359,6 @@ validate-npm-package-license@^3.0.1:
 "vtex.store-graphql@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-graphql@2.157.1/public/@types/vtex.store-graphql":
   version "2.157.1"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-graphql@2.157.1/public/@types/vtex.store-graphql#43d0eb0f732d38fa0885237fecf46a12dd974541"
-
-"vtex.store-icons@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-icons@0.18.0/public/@types/vtex.store-icons":
-  version "0.18.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-icons@0.18.0/public/@types/vtex.store-icons#0ee94d549aa283ce3a13ab987c13eac4fdfd1bba"
 
 "vtex.store-resources@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-resources@0.88.0/public/@types/vtex.store-resources":
   version "0.88.0"
