@@ -2235,9 +2235,9 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-"thefoschini.search@https://tlf1577--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.2+build1667282607/public/@types/thefoschini.search":
+"thefoschini.search@https://tlf1577--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.2+build1667282995/public/@types/thefoschini.search":
   version "2.13.2"
-  resolved "https://tlf1577--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.2+build1667282607/public/@types/thefoschini.search#f9a0f6079f9339e67feb5f151281d51ba80c3394"
+  resolved "https://tlf1577--thefoschini.myvtex.com/_v/private/typings/linked/v1/thefoschini.search@2.13.2+build1667282995/public/@types/thefoschini.search#29da7b5598562312c17ed0d869bff7f09e7b4eee"
 
 through@^2.3.6:
   version "2.3.8"
@@ -2344,10 +2344,6 @@ validate-npm-package-license@^3.0.1:
   version "1.8.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.8.0/public/@types/vtex.pixel-manager#3ccfcb1927614984a5f7a3e5650c8c8d2bd3c0f4"
 
-"vtex.product-context@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.10.0/public/@types/vtex.product-context":
-  version "0.10.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.10.0/public/@types/vtex.product-context#c5e2a97b404004681ee12f4fff7e6b62157786cc"
-
 "vtex.product-list-context@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-list-context@0.4.1/public/@types/vtex.product-list-context":
   version "0.4.1"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-list-context@0.4.1/public/@types/vtex.product-list-context#e17348f7c5a4b6d543da1ce8858a726cb6d72fae"
@@ -2363,10 +2359,6 @@ validate-npm-package-license@^3.0.1:
 "vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.6/public/@types/vtex.render-runtime":
   version "8.132.6"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.6/public/@types/vtex.render-runtime#166e916d8aadbee0cfc4d48a02d3c3e8f2834fc9"
-
-"vtex.search-result@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.search-result@3.118.18/public/@types/vtex.search-result":
-  version "3.118.18"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.search-result@3.118.18/public/@types/vtex.search-result#194e61b82b5b5486d1032fe0223f5ca2d6b80690"
 
 "vtex.shipping-estimate-translator@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shipping-estimate-translator@2.2.3/public/@types/vtex.shipping-estimate-translator":
   version "2.2.3"
