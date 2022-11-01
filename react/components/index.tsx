@@ -6,7 +6,7 @@ import { withApollo, WithApolloClient } from 'react-apollo'
 import { ProductListContext } from 'vtex.product-list-context'
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
 import { useRuntime } from 'vtex.render-runtime'
-import BiggyClient from './biggy-client'
+import SearchClient from './search-client'
 import ProductResults from './ProductResults'
 import SuggestionSection from './SuggestionSection'
 
@@ -43,7 +43,7 @@ class AutoComplete extends React.Component<
   WithApolloClient<AutoCompleteProps>,
   Partial<AutoCompleteState>
 > {
-  client: BiggyClient
+  client: SearchClient
 
   public readonly state: AutoCompleteState = {
     products: [],
@@ -54,7 +54,7 @@ class AutoComplete extends React.Component<
   constructor(props: WithApolloClient<AutoCompleteProps>) {
     super(props)
 
-    this.client = new BiggyClient(this.props.client)
+    this.client = new SearchClient(this.props.client)
   }
 
   closeModal() {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ISuggestionQueryResponseSearch } from './biggy-client'
+import { ISuggestionQueryResponseSearch } from './search-client'
 import { Item } from './Autocomplete/components/SuggestionSection/types'
 import { decodeUrlString } from './string-utils'
 
@@ -85,7 +85,7 @@ export const transformSearchHistory = (searchItems: string[]) => {
   return result
 }
 
-const HISTORY_KEY = 'biggy-search-history'
+const HISTORY_KEY = 'bash-search-history'
 
 /**
  * Get the search history from cookies

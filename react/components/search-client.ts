@@ -4,7 +4,7 @@ import suggestionSearches from 'vtex.store-resources/QueryAutocompleteSearchSugg
 
 import { ISearchProduct } from './search-product'
 
-export default class BiggyClient {
+export default class SearchClient {
   constructor(private client: ApolloClient<any>) {}
 
   public async suggestionSearches(
