@@ -13,11 +13,7 @@
     "styles": "2.x"
   },
   "dependencies": {
-    "vtex.native-types": "0.x",
-    "vtex.shipping-estimate-translator": "2.x",
-    "vtex.store-graphql": "2.x",
     "vtex.store-resources": "0.x",
-    "vtex.styleguide": "9.x",
     "vtex.store-components": "3.x",
     "vtex.product-summary": "2.x",
     "vtex.product-list-context": "0.x",
