@@ -1,14 +1,3 @@
-import unescape from 'unescape'
-
-/*
- * Functions designed to provide compatibility between our search components
- * and store-components components.
- */
-
-function textOverflow(text: string, maxWidth: number) {
-  return text.length > maxWidth ? `${text.substr(0, maxWidth - 3)}...` : text
-}
-
 type UpdateQuery = (prev: any, options: { fetchMoreResult: any }) => void
 type FetchMoreOptions = {
   variables: { to: number; page?: number }
@@ -92,59 +81,4 @@ const makeUpdateQuery: (page: number) => UpdateQuery = page => (
       ],
     },
   }
-}
-
-/**
- * Convert Biggy attributes into VTEX Catalog facets.
- *
- * @export
- * @param {*} attribute A searchResult attribute.
- * @returns A Catalog facet.
- */
-export function fromAttributesToFacets(attribute: any) {
-  if (attribute.type === 'number') {
-    return {
-      map: 'priceRange',
-      name: attribute.label,
-      slug: `de-${attribute.minValue}-a-${attribute.maxValue}`,
-    }
-  }
-
-  return {
-    name: attribute.label,
-    facets: attribute.values.map((value: any) => {
-      return {
-        quantity: value.count,
-        name: unescape(textOverflow(value.label, 40)),
-        link: value.proxyUrl,
-        linkEncoded: value.proxyUrl,
-        map: attribute.key,
-        selected: value.active,
-        value: `z${value.key}`,
-      }
-    }),
-  }
-}
-
-export function convertURLToAttributePath(
-  attributePath: string,
-  map: string,
-  priceRange: string,
-  priceRangeKey: string
-) {
-  const facets = (attributePath || '').split('/')
-  const apiUrlTerms = (map || '')
-    .split(',')
-    .slice(1)
-    .map((item, index) => `${item}/${facets[index].replace(/^z/, '')}`)
-
-  const url = apiUrlTerms.join('/')
-
-  if (priceRange && priceRangeKey) {
-    const [from, to] = priceRange.split(' TO ')
-
-    return `${url}/${priceRangeKey}/${from}:${to}`
-  }
-
-  return url
 }
