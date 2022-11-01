@@ -9,8 +9,7 @@
   },
   "builders": {
     "store": "0.x",
-    "react": "3.x",
-    "styles": "2.x"
+    "react": "3.x"
   },
   "dependencies": {
     "vtex.store-resources": "0.x",
