@@ -1,4 +1,4 @@
-import BiggyClient from './utils/biggy-client'
+import BiggyClient from './components/biggy-client'
 
 export default {
   BiggyClient,

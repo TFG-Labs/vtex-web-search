@@ -6,7 +6,7 @@ import { withApollo, WithApolloClient } from 'react-apollo'
 import { ProductListContext } from 'vtex.product-list-context'
 import { withPixel } from 'vtex.pixel-manager/PixelContext'
 import { useRuntime } from 'vtex.render-runtime'
-import BiggyClient from '../utils/biggy-client'
+import BiggyClient from './biggy-client'
 import ProductResults from './ProductResults'
 import SuggestionSection from './SuggestionSection'
 
@@ -16,7 +16,7 @@ import {
   handleItemClick,
   handleProductClick,
   handleSeeAllClick,
-} from '../utils/pixel'
+} from './pixel-events'
 import SeeMoreButton from './SeeMoreButton'
 import SearchHistory from './SearchHistory'
 import { addTermToHistory, transformSearchSuggestions } from './utils'

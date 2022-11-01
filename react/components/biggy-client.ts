@@ -2,7 +2,7 @@ import ApolloClient, { ApolloQueryResult } from 'apollo-client'
 import suggestionProducts from 'vtex.store-resources/QuerySuggestionProducts'
 import suggestionSearches from 'vtex.store-resources/QueryAutocompleteSearchSuggestions'
 
-import { ISearchProduct } from '../components/search-product'
+import { ISearchProduct } from './search-product'
 
 export default class BiggyClient {
   constructor(private client: ApolloClient<any>) {}

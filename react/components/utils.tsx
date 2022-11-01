@@ -1,7 +1,7 @@
 import React from 'react'
-import { ISuggestionQueryResponseSearch } from '../utils/biggy-client'
+import { ISuggestionQueryResponseSearch } from './biggy-client'
 import { Item } from './Autocomplete/components/SuggestionSection/types'
-import { decodeUrlString } from '../utils/string-utils'
+import { decodeUrlString } from './string-utils'
 
 /**
  * Given a query and a label: wrap the term in a bold span for styling
