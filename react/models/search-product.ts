@@ -1,10 +1,3 @@
-export interface ISearchProductText {
-  key: string
-  value: string
-  labelKey: string
-  labelValue: string
-}
-
 export interface ISearchProduct {
   id: string
   name: string

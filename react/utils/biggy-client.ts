@@ -78,8 +78,3 @@ interface IElasticProductText {
   labelKey: string
   labelValue: string
 }
-
-export interface IExtraInfo {
-  key: string
-  value: string
-}
